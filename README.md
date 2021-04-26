@@ -13,7 +13,7 @@ Step 3: make an 1.6.4 instance in Multimc
 
 Step 4: Right click on your new instance, go to edit instance, version
 
-Step 5: Press replace minecraft.jar and select Bl4ckHax.jar
+Step 5: Press add to minecraft.jar and select Bl4ckHax.jar
 
 Step 6: Press launch
 
