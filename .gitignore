@@ -1,0 +1,14 @@
+*.bat
+*.sh
+/bin
+/conf
+/docs
+/eclipse
+/jars
+/lib
+/logs
+/reobf
+/runtime
+/temp
+LICENSE.txt
+CHANGELOG
