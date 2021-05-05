@@ -524,6 +524,19 @@ public class RenderGlobal implements IWorldAccess
     	GL11.glEnable(2929);
     }
     
+    public static void Search(double x, double y, double z) {
+    	GL11.glBlendFunc(770, 771);
+    	GL11.glColor3f(0.239F, 1F, 0.305F);
+    	GL11.glLineWidth(5F);
+    	GL11.glDisable(3553);
+    	GL11.glDisable(2929);
+    	GL11.glDepthMask(false);
+    	drawOutlinedBoundingBox(new AxisAlignedBB(x + 1, y + 1, z + 1, x, y ,z));
+    	GL11.glDepthMask(true);
+    	GL11.glEnable(3553);
+    	GL11.glEnable(2929);
+    }
+    
     
 
     /**
@@ -551,6 +564,29 @@ public class RenderGlobal implements IWorldAccess
 		GL11.glEnable(2929 /* GL_DEPTH_TEST */);
  
 	}
+    
+    public static void drawFriendTracerESP(double d, double d1, double d2) {
+		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GL11.glColor4f(0.0F, 0.0F, 0.0F, 1.F);
+		GL11.glLineWidth(2.0F);
+		GL11.glDisable(GL11.GL_TEXTURE_2D);
+		GL11.glDepthMask(false);
+		GL11.glEnable(GL11.GL_LINE_SMOOTH);
+		GL11.glBlendFunc(770, 771);
+		GL11.glDisable(3553 /* GL_TEXTURE_2D */);
+		GL11.glDisable(2929 /* GL_DEPTH_TEST */);
+		GL11.glDepthMask(false);
+		GL11.glEnable(GL11.GL_LINE_SMOOTH);
+		drawOutlinedBoundingBox(new AxisAlignedBB(d - 0.5D, d1 + 0.10000000000000001D, d2 - 0.5D, d + 0.5D, d1 + 2D, d2 + 0.5D));
+		GL11.glColor4f(0.0F, 255.0F, 0.0F, 0.3F);
+		drawBoundingBox(new AxisAlignedBB(d - 0.5D, d1 + 0.10000000000000001D, d2 - 0.5D, d + 0.5D, d1 + 2D, d2 + 0.5D));
+		GL11.glDepthMask(true);
+		GL11.glEnable(3553 /* GL_TEXTURE_2D */);
+		GL11.glEnable(2929 /* GL_DEPTH_TEST */);
+ 
+	}
+    
     public static void drawAuraESP(double d, double d1, double d2) {
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -1914,9 +1950,13 @@ public class RenderGlobal implements IWorldAccess
             double size = 0.45;
             double ytSize = 0.35;
             GL11.glBegin(GL11.GL_LINES);
-            GL11.glColor3f(255, 0, 0);
             for(int x = 0; x < mc.theWorld.playerEntities.size(); x ++) {
-                Entity entity = (Entity) mc.theWorld.playerEntities.get(x);     
+                Entity entity = (Entity) mc.theWorld.playerEntities.get(x); 
+                if(Client.friendslist.contains(entity.getEntityName())) {
+                	GL11.glColor3f(0, 255, 0);
+                }else {
+                	GL11.glColor3f(255, 0, 0);
+                }
                 double X = entity.posX;
                 double Y = entity.posY;
                 double Z = entity.posZ;

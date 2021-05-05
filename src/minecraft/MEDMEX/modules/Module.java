@@ -18,6 +18,7 @@ public class Module {
 	public Category category;
 	public boolean getKey;
 	public boolean setKey;
+	public String attribute;
 	public Minecraft mc = Minecraft.getMinecraft();
 	
 	public List<Setting> settings = new ArrayList<Setting>();
@@ -27,6 +28,7 @@ public class Module {
 		this.keyCode.code = key;
 		this.category = c;
 		this.addSettings(keyCode);
+		this.attribute = "";
 	}
 	
 	public void addSettings(Setting...settings) {

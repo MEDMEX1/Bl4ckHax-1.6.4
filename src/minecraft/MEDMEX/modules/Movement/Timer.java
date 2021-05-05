@@ -15,7 +15,6 @@ public class Timer extends Module {
 		
 	
 	public void onEnable() {
-		net.minecraft.src.Timer.CustomTimer = customtimercmd;
 		
 		
 		
@@ -25,6 +24,17 @@ public class Timer extends Module {
 		net.minecraft.src.Timer.CustomTimer = 1.0F;
 		
 	}
+	
+	public void onEvent(Event e) {
+		if(e instanceof EventUpdate) {
+			if(e.isPre()) {
+				net.minecraft.src.Timer.CustomTimer = customtimercmd;
+				this.attribute = " ["+customtimercmd+"]";
+			}
+
+			}
+				
+			}
 	
 
 

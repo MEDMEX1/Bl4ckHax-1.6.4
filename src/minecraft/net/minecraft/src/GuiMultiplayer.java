@@ -9,6 +9,8 @@ import java.util.Collections;
 import java.util.List;
 import org.lwjgl.input.Keyboard;
 
+import MEDMEX.UI.MainMenu;
+
 public class GuiMultiplayer extends GuiScreen
 {
     /** Number of outstanding ThreadPollServers threads */
@@ -194,7 +196,7 @@ public class GuiMultiplayer extends GuiScreen
             }
             else if (par1GuiButton.id == 0)
             {
-                this.mc.displayGuiScreen(this.parentScreen);
+                this.mc.displayGuiScreen(new MainMenu());
             }
             else if (par1GuiButton.id == 8)
             {
@@ -206,6 +208,9 @@ public class GuiMultiplayer extends GuiScreen
             }
         }
     }
+    
+    
+    
 
     public void confirmClicked(boolean par1, int par2)
     {

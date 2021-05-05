@@ -34,7 +34,7 @@ public class Client {
 	
 	public static String friendslist = "";
 	public static ClickGui clickgui = new ClickGui();
-	public static String name = "Bl4ckHax", version = "9.0";
+	public static String name = "Bl4ckHax", version = "10.0";
 	public static CopyOnWriteArrayList<Module> modules = new CopyOnWriteArrayList<Module>();
 	public static HUD hud = new HUD();
 	public static CommandManager commandManager = new CommandManager();
@@ -113,7 +113,9 @@ public class Client {
 		modules.add(new TaxiFly());
 		modules.add(new NameProtect());
 		modules.add(new Phase());
-		
+		modules.add(new Jesus2());
+		modules.add(new Search());
+		modules.add(new Derp());
 		
 		Config.load();
 		

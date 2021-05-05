@@ -7,6 +7,7 @@ import MEDMEX.Client;
 
 public class BlockBed extends BlockDirectional
 {
+	long timer = 0l;
 	public static boolean bedaura = false;
 	public Minecraft mc = Minecraft.getMinecraft();
     /** Maps the foot-of-bed block to the head-of-bed block. */
@@ -184,10 +185,16 @@ public class BlockBed extends BlockDirectional
     public void setBlockBoundsBasedOnState(IBlockAccess par1IBlockAccess, int par2, int par3, int par4)
     {
     	if(bedaura == true) {
+    	if(mc.thePlayer.getDistance(par2, par3, par4) < 16) {
     	float yaw = (float) -(Math.atan2((par2-mc.thePlayer.posX),(par4-mc.thePlayer.posZ))*(180.0/Math.PI));
 		float pitch = (float)  -(Math.asin((par3 - mc.thePlayer.posY) / mc.thePlayer.getDistance(par2, par3, par4))*(180.0/Math.PI));
+		timer++;
+		if(timer >= 3) {
 		mc.thePlayer.sendQueue.addToSendQueue(new Packet12PlayerLook(yaw, pitch-5, true));
 		mc.thePlayer.sendQueue.addToSendQueue(new Packet15Place(par2, par3, par4, 1, Minecraft.thePlayer.inventory.getStackInSlot(Minecraft.thePlayer.inventory.currentItem), 0, 0 ,0));
+		timer = 0l;
+		}
+    	}
     	}
     	this.setBounds();
     }

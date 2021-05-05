@@ -3,6 +3,7 @@ package net.minecraft.src;
 import com.google.common.base.Charsets;
 
 import MEDMEX.Client;
+import MEDMEX.UI.MainMenu;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -628,7 +629,7 @@ public class NetClientHandler extends NetHandler
         }
         else
         {
-            this.mc.displayGuiScreen(new GuiDisconnected(new GuiMultiplayer(new GuiMainMenu()), "disconnect.disconnected", "disconnect.genericReason", new Object[] {par1Packet255KickDisconnect.reason}));
+            this.mc.displayGuiScreen(new GuiDisconnected(new GuiMultiplayer(new MainMenu()), "disconnect.disconnected", "disconnect.genericReason", new Object[] {par1Packet255KickDisconnect.reason}));
         }
     }
 
@@ -645,7 +646,7 @@ public class NetClientHandler extends NetHandler
             }
             else
             {
-                this.mc.displayGuiScreen(new GuiDisconnected(new GuiMultiplayer(new GuiMainMenu()), "disconnect.lost", par1Str, par2ArrayOfObj));
+                this.mc.displayGuiScreen(new GuiDisconnected(new GuiMultiplayer(new MainMenu()), "disconnect.lost", par1Str, par2ArrayOfObj));
             }
         }
     }

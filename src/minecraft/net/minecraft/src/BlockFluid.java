@@ -163,7 +163,7 @@ public abstract class BlockFluid extends Block
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4)
     {
     	if(jesus == true) {
-    		return AxisAlignedBB.getAABBPool().getAABB((double)par2 + this.minX - 0.1, (double)par3 + this.minY - 0.1, (double)par4 + this.minZ - 0.1, (double)par2 + this.maxX - 0.1, (double)par3 + this.maxY - 0.1, (double)par4 + this.maxZ - 0.1);
+    		return AxisAlignedBB.getAABBPool().getAABB((double)par2 + this.minX, (double)par3 + this.minY, (double)par4 + this.minZ, (double)par2 + this.maxX, (double)par3 + this.maxY, (double)par4 + this.maxZ);
     	}
         return null;
     }

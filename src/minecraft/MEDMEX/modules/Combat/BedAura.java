@@ -28,13 +28,18 @@ public class BedAura extends Module {
 
 	public void onEnable() {
 		BlockBed.bedaura = true;
-
+		EntityClientPlayerMP.bedaura = true;
 	}
 	
 	public void onDisable() {
 		BlockBed.bedaura = false;
+		EntityClientPlayerMP.bedaura = false;
+		EntityClientPlayerMP.rotationoverride = false;
 		
 	}
+	
+	
+	
 }
 	
 

@@ -1,5 +1,7 @@
 package net.minecraft.src;
 
+import MEDMEX.UI.MainMenu;
+
 public class GuiIngameMenu extends GuiScreen
 {
     /** Also counts the number of updates, not certain as to why yet. */
@@ -48,7 +50,7 @@ public class GuiIngameMenu extends GuiScreen
                 this.mc.statFileWriter.readStat(StatList.leaveGameStat, 1);
                 this.mc.theWorld.sendQuittingDisconnectingPacket();
                 this.mc.loadWorld((WorldClient)null);
-                this.mc.displayGuiScreen(new GuiMainMenu());
+                this.mc.displayGuiScreen(new MainMenu());
 
             case 2:
             case 3:

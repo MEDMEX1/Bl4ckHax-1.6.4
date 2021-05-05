@@ -3,8 +3,11 @@ package net.minecraft.src;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import MEDMEX.Util.Render3D;
+
 public class RenderBlocks
 {
+	public static boolean search = false;
     /** The IBlockAccess used by this instance of RenderBlocks */
     public IBlockAccess blockAccess;
 
@@ -364,6 +367,7 @@ public class RenderBlocks
      */
     public void renderBlockUsingTexture(Block par1Block, int par2, int par3, int par4, Icon par5Icon)
     {
+    	
         this.setOverrideBlockTexture(par5Icon);
         this.renderBlockByRenderType(par1Block, par2, par3, par4);
         this.clearOverrideBlockTexture();
@@ -374,6 +378,8 @@ public class RenderBlocks
      */
     public void renderBlockAllFaces(Block par1Block, int par2, int par3, int par4)
     {
+ 
+    	
         this.renderAllFaces = true;
         this.renderBlockByRenderType(par1Block, par2, par3, par4);
         this.renderAllFaces = false;
@@ -7018,6 +7024,9 @@ public class RenderBlocks
             var9.addVertexWithUV(var28, var30, var32, var18, var22);
             var9.addVertexWithUV(var28, var30, var34, var12, var16);
         }
+        
+        
+        
     }
 
     /**

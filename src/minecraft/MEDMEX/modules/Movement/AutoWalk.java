@@ -5,6 +5,7 @@ import org.lwjgl.input.Keyboard;
 import MEDMEX.events.Event;
 import MEDMEX.events.listeners.EventUpdate;
 import MEDMEX.modules.Module;
+import MEDMEX.modules.Player.AutoEat;
 import net.minecraft.src.Minecraft;
 
 public class AutoWalk extends Module {
@@ -23,7 +24,11 @@ public class AutoWalk extends Module {
 	public void onEvent(Event e) {
 		if(e instanceof EventUpdate) {
 			if(e.isPre()) {
+				if(!AutoEat.started) {
 				mc.gameSettings.keyBindForward.pressed = true;
+				}else {
+					mc.gameSettings.keyBindForward.pressed = Keyboard.isKeyDown(mc.gameSettings.keyBindForward.keyCode);
+				}
 			}
 		}
 	}

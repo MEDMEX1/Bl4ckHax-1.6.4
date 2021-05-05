@@ -186,7 +186,7 @@ public abstract class Entity
     /** Which dimension the player is in (-1 = the Nether, 0 = normal world) */
     public int dimension;
     protected int teleportDirection;
-    private boolean invulnerable;
+    public boolean invulnerable;
     private UUID entityUniqueID;
     public EnumEntitySize myEntitySize;
 

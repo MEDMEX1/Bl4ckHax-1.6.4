@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
 
+import MEDMEX.Client;
+
 public class WorldClient extends World
 {
     /** The packets that need to be sent to the server. */
@@ -152,7 +154,6 @@ public class WorldClient extends World
     {
         boolean var2 = super.spawnEntityInWorld(par1Entity);
         this.entityList.add(par1Entity);
-
         if (!var2)
         {
             this.entitySpawnQueue.add(par1Entity);

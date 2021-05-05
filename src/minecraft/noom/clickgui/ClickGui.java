@@ -17,6 +17,7 @@ public class ClickGui extends GuiScreen {
 
 	@Override
 	public void drawScreen(int par1, int par2, float par3) {
+		
 		Gui.drawRect(210, 100, 650, 400, Color.gray.brighter().hashCode());
 		int y = 0;
 		if(cc.isEmpty()){

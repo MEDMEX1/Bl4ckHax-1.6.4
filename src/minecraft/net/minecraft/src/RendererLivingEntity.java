@@ -522,7 +522,11 @@ public abstract class RendererLivingEntity extends Render
     		RenderGlobal.drawAuraESP(par3, par5, par7);
     	}
     	if(RenderGlobal.tracerenabled) {
+    		if(Client.friendslist.contains(par2Str)) {
+    			RenderGlobal.drawFriendTracerESP(par3, par5, par7);
+    		}else {
     		RenderGlobal.drawTracerESP(par3, par5, par7);
+    		}
     	}
     	
     	

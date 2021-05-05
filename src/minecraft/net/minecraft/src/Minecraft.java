@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 
 import MEDMEX.Client;
 import MEDMEX.UI.HUD;
+import MEDMEX.UI.MainMenu;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -410,11 +411,11 @@ public class Minecraft implements IPlayerUsage
         
         if (this.serverName != null)
         {
-            this.displayGuiScreen(new GuiConnecting(new GuiMainMenu(), this, this.serverName, this.serverPort));
+            this.displayGuiScreen(new GuiConnecting(new MainMenu(), this, this.serverName, this.serverPort));
         }
         else
         {
-            this.displayGuiScreen(new GuiMainMenu());
+            this.displayGuiScreen(new MainMenu());
         }
 
         this.loadingScreen = new LoadingScreenRenderer(this);
@@ -596,14 +597,14 @@ public class Minecraft implements IPlayerUsage
 
         if (par1GuiScreen == null && this.theWorld == null)
         {
-            par1GuiScreen = new GuiMainMenu();
+            par1GuiScreen = new MainMenu();
         }
         else if (par1GuiScreen == null && this.thePlayer.getHealth() <= 0.0F)
         {
             par1GuiScreen = new GuiGameOver();
         }
 
-        if (par1GuiScreen instanceof GuiMainMenu)
+        if (par1GuiScreen instanceof MainMenu)
         {
             this.gameSettings.showDebugInfo = false;
             this.ingameGUI.getChatGUI().clearChatMessages();
@@ -921,7 +922,7 @@ public class Minecraft implements IPlayerUsage
 
     private int getLimitFramerate()
     {
-        return this.currentScreen != null && this.currentScreen instanceof GuiMainMenu ? 2 : this.gameSettings.limitFramerate;
+        return this.currentScreen != null && this.currentScreen instanceof MainMenu ? 2 : this.gameSettings.limitFramerate;
     }
 
     public void freeMemory()

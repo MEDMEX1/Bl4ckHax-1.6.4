@@ -37,8 +37,7 @@ class TcpReaderThread extends Thread
             }
         }
     	
-        finally
-        {            TcpConnection.field_74471_a.getAndDecrement();        }
+        finally        {            TcpConnection.field_74471_a.getAndDecrement();        }
     }
 }
 

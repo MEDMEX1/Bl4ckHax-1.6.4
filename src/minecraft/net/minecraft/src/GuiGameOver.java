@@ -3,6 +3,8 @@ package net.minecraft.src;
 import java.util.Iterator;
 import org.lwjgl.opengl.GL11;
 
+import MEDMEX.UI.MainMenu;
+
 public class GuiGameOver extends GuiScreen
 {
     /**
@@ -67,7 +69,7 @@ public class GuiGameOver extends GuiScreen
             case 2:
                 this.mc.theWorld.sendQuittingDisconnectingPacket();
                 this.mc.loadWorld((WorldClient)null);
-                this.mc.displayGuiScreen(new GuiMainMenu());
+                this.mc.displayGuiScreen(new MainMenu());
         }
     }
 

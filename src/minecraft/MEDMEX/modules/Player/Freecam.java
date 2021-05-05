@@ -34,6 +34,7 @@ public class Freecam extends Module {
 
 	 
 	public void onEnable() {
+		if(!(mc.thePlayer == null)) {
 		EntityPlayer entity = new EntityOtherPlayerMP(Minecraft.theWorld, Minecraft.thePlayer.username);
 		entity.copyDataFrom(Minecraft.thePlayer, true);
 		entity.posY -= Minecraft.thePlayer.yOffset;
@@ -42,6 +43,9 @@ public class Freecam extends Module {
 		EntityClientPlayerMP.freecamenabled = true;
 		mc.thePlayer.capabilities.isFlying = true;
 		handler.saveLocation(mc.thePlayer);
+		}else {
+			this.toggle();
+		}
 	}
 
 	public void onDisable() {

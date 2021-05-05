@@ -35,6 +35,7 @@ public class CombatLog extends Module {
 	public void onEvent(Event e) {
 		if(e instanceof EventUpdate) {
 			if(e.isPre()) {
+				this.attribute = " ["+customhealth+"]";
 				if(mc.thePlayer.getHealth() < customhealth) {
 					mc.theWorld.sendQuittingDisconnectingPacket();
 					toggled = false;	

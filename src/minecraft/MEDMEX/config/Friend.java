@@ -15,17 +15,21 @@ public class Friend {
 	public static String newfriend = "";
 	static String filedir = Client.name + "\\";
 	static String configfiledir = Client.name + "\\friends";
+	public static String friends;
 	
 	public static void loadfriends() {
 		createFiles();
+		String thisLine = null;
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(new File(configfiledir)));
-			String line = reader.lines().collect(Collectors.joining());
-			Client.friendslist = line;
-			reader.close();
-		}	catch(IOException e) {
+			while((thisLine = reader.readLine()) !=null) {
+				System.out.println(thisLine);
+				Client.friendslist += thisLine;
+			}
+		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 		
 	public static void save(){

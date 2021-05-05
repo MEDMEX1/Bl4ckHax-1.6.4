@@ -2,11 +2,19 @@ package net.minecraft.src;
 
 import java.util.Iterator;
 import java.util.List;
+import net.minecraft.src.GuiConnecting;
+import net.minecraft.src.GuiMultiplayer;
+import net.minecraft.src.GuiScreen;
+import net.minecraft.src.IntegratedServer;
+import net.minecraft.src.Minecraft;
+import net.minecraft.src.Packet;
+import net.minecraft.src.ServerData;
 
 public class GuiDisconnected extends GuiScreen
 {
     /** The error message. */
     private String errorMessage;
+    public static String lastserverip;
 
     /** The details about the error. */
     private String errorDetail;
@@ -34,6 +42,8 @@ public class GuiDisconnected extends GuiScreen
     {
         this.buttonList.clear();
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, this.height / 4 + 120 + 12, I18n.getString("gui.toMenu")));
+        this.buttonList.add(new GuiButton(1, this.width / 2 - 100, this.height / 4 + 150 + 12, I18n.getString("Reconnect")));
+       
 
         if (this.field_74247_c != null)
         {
@@ -52,9 +62,21 @@ public class GuiDisconnected extends GuiScreen
     {
         if (par1GuiButton.id == 0)
         {
-            this.mc.displayGuiScreen(this.field_98095_n);
+            this.mc.displayGuiScreen(new GuiMultiplayer(this));
         }
+        if (par1GuiButton.id == 1)
+        {
+        	ServerData par1ServerData = new ServerData("server", lastserverip);
+        	mc.displayGuiScreen(new GuiConnecting(this, this.mc, par1ServerData));
+        	
+        	
+    		
+        }
+       
+
     }
+    
+   
 
     /**
      * Draws the screen and all the components in it.

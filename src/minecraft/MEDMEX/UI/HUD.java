@@ -37,9 +37,9 @@ public class HUD {
 
 		@Override
 		public int compare(Module o1, Module o2) {
-			if(Minecraft.getMinecraft().fontRenderer.getStringWidth(o1.name) > Minecraft.getMinecraft().fontRenderer.getStringWidth(o2.name))
+			if(Minecraft.getMinecraft().fontRenderer.getStringWidth(o1.name + o1.attribute) > Minecraft.getMinecraft().fontRenderer.getStringWidth(o2.name + o2.attribute))
 				return -1;
-			if(Minecraft.getMinecraft().fontRenderer.getStringWidth(o1.name) < Minecraft.getMinecraft().fontRenderer.getStringWidth(o2.name))
+			if(Minecraft.getMinecraft().fontRenderer.getStringWidth(o1.name + o1.attribute) < Minecraft.getMinecraft().fontRenderer.getStringWidth(o2.name + o2.attribute))
 				return 1;
 			
 			
@@ -87,8 +87,8 @@ public class HUD {
 			
 			mc.fontRenderer.drawStringWithShadow(coords, 4, 14, ColorUtil.getRainbow(4, 1.0f, 1, -100));
 			mc.fontRenderer.drawStringWithShadow("Current Item: "+var, 4, 24, ColorUtil.getRainbow(4, 1.0f, 1, -200));
-			mc.fontRenderer.drawStringWithShadow("Name: "+ Session.username, 4, 34, ColorUtil.getRainbow(4, 1.0f, 1, -400));
-			mc.fontRenderer.drawStringWithShadow("Speed: "+speed3, 4, 44, ColorUtil.getRainbow(4, 1.0f, 1, -500));
+			mc.fontRenderer.drawStringWithShadow("Name: "+ Session.username, 4, 34, ColorUtil.getRainbow(4, 1.0f, 1, -300));
+			mc.fontRenderer.drawStringWithShadow("Speed: "+speed3, 4, 44, ColorUtil.getRainbow(4, 1.0f, 1, -400));
 		
 			}
 		}
@@ -111,7 +111,7 @@ public class HUD {
 			if(!m.toggled)
 				continue;	
 			if(GameSettings.showDebugInfo == false) {
-			mc.fontRenderer.drawStringWithShadow(m.name, sr.getScaledWidth() - fr.getStringWidth(m.name) - 4, 4 + count * (fr.FONT_HEIGHT + 2), ColorUtil.getRainbow(4, 1.0f, 1, count * -100));
+			mc.fontRenderer.drawStringWithShadow(m.name + m.attribute, sr.getScaledWidth() - fr.getStringWidth(m.name + m.attribute) - 4, 4 + count * (fr.FONT_HEIGHT + 2), ColorUtil.getRainbow(4, 1.0f, 1, count * -100));
 			}
 			count++;
 			

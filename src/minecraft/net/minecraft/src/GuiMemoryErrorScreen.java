@@ -1,5 +1,7 @@
 package net.minecraft.src;
 
+import MEDMEX.UI.MainMenu;
+
 public class GuiMemoryErrorScreen extends GuiScreen
 {
     /**
@@ -19,7 +21,7 @@ public class GuiMemoryErrorScreen extends GuiScreen
     {
         if (par1GuiButton.id == 0)
         {
-            this.mc.displayGuiScreen(new GuiMainMenu());
+            this.mc.displayGuiScreen(new MainMenu());
         }
         else if (par1GuiButton.id == 1)
         {

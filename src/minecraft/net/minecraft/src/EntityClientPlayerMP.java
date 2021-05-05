@@ -7,10 +7,15 @@ import MEDMEX.events.listeners.EventMotion;
 
 public class EntityClientPlayerMP extends EntityPlayerSP
 {
+	public static boolean derp = false;
+	public static float bedblockx, bedblockz;
+	public static long bedtimer, bedtimermain;
+	public static boolean bedaura = false;
 	public static boolean rotationoverride = false;
 	public static float customyaw;
 	public static float custompitch;
 	public static boolean flatten = false;
+	public static boolean jesusoverride = false;
 	long timer = 0l;
 	public static boolean silent = false;
 	public static boolean xcarry = false;
@@ -85,10 +90,102 @@ public class EntityClientPlayerMP extends EntityPlayerSP
     public void sendMotionUpdates()
     {
     	
+    	
+    	
+    	if(!jesusoverride) {
+    		
+    	}
+    	
     	if(!rotationoverride) {
         	customyaw = this.rotationYaw;
         	custompitch = this.rotationPitch;
         }
+    	
+    	if(bedaura) {
+    		for(int i = 0; i < mc.theWorld.loadedEntityList.size(); i++) {
+    			if((Entity)mc.theWorld.loadedEntityList.get(i) != this &&  getDistanceSqToEntity((Entity)mc.theWorld.loadedEntityList.get(i))<25D) {
+    				if(((Entity)mc.theWorld.loadedEntityList.get(i) instanceof EntityPlayer)){
+    					float x = getPosX((Entity)mc.theWorld.loadedEntityList.get(i));
+    					float z = getPosZ((Entity)mc.theWorld.loadedEntityList.get(i));
+    					float y = getPosY((Entity)mc.theWorld.loadedEntityList.get(i));
+    					float px = (float) mc.thePlayer.posX;
+    					float pz = (float) mc.thePlayer.posZ;
+    					float dx = px -x;
+    					float dz = pz -z;
+    					float realx = (float)mc.thePlayer.posX + (dx*-1);
+    					float realz = (float)mc.thePlayer.posZ + (dz*-1);
+    					int placex = (int)(realx-1);
+    					int placez = (int) (realz-1);
+    					bedtimermain++;
+    					if(bedtimermain >= 2) {
+    					bedtimer++;
+    					if(bedtimer == 1) {
+    						bedblockx = x+1;
+    						bedblockz = z;
+    					}
+    					if(bedtimer == 2) {
+    						bedblockx = x+1;
+    						bedblockz = z-1;
+    					}
+    					if(bedtimer == 3) {
+    						bedblockx = x;
+    						bedblockz = z-1;
+    					}
+    					if(bedtimer == 4) {
+    						bedblockx = x-1;
+    						bedblockz = z-1;
+    					}
+    					if(bedtimer == 5) {
+    						bedblockx = x-1;
+    						bedblockz = z;
+    					}
+    					if(bedtimer == 6) {
+    						bedblockx = x-1;
+    						bedblockz = z+1;
+    					}
+    					if(bedtimer == 7) {
+    						bedblockx = x;
+    						bedblockz = z+1;
+    					}
+    					if(bedtimer == 8) {
+    						bedblockx = x+1;
+    						bedblockz = z+1;
+    						bedtimer = 0l;
+    					}
+    					bedtimermain = 0l;  					
+    					if(mc.theWorld.isAirBlock(placex, (int)y, placez)) {
+    						int bestSlot = -1;
+    						for(int j = 0; j < 9; j++) {
+    							ItemStack stack =
+    									mc.thePlayer.inventory.getStackInSlot(j);
+    								if(stack == null || !(stack.getItem() instanceof ItemBed))
+    									continue;
+    								bestSlot = j;
+    								mc.thePlayer.inventory.currentItem = bestSlot;
+    								
+    						
+    						rotationoverride = true;
+    						float yaw = (float) -(Math.atan2((bedblockx-mc.thePlayer.posX),(bedblockz-mc.thePlayer.posZ))*(180.0/Math.PI));
+    						float pitch = (float)  -(Math.asin(((y-1) - mc.thePlayer.posY) / mc.thePlayer.getDistance(bedblockx, y-1, bedblockz))*(180.0/Math.PI));
+    						customyaw = yaw;
+    						custompitch = pitch;
+    						mc.thePlayer.sendQueue.addToSendQueue(new Packet15Place((int)bedblockx, (int)y-1, (int)bedblockz, 1, Minecraft.thePlayer.inventory.getStackInSlot(mc.thePlayer.inventory.currentItem), 0, 0 ,0));
+    						mc.thePlayer.swingItem();
+    						
+    						
+    						}
+    					}
+    					
+    				}
+    				}
+    					
+    				}else {
+    					rotationoverride = false;
+    				}
+    					
+    				}
+    	}
+    	
     	
     	
     	if(aura == true) {
