@@ -6,6 +6,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import MEDMEX.Client;
+
 public class MapData extends WorldSavedData
 {
     public int xCenter;
@@ -13,6 +15,7 @@ public class MapData extends WorldSavedData
     public byte dimension;
     public byte scale;
 
+    public static List playerlist;
     /** colours */
     public byte[] colors = new byte[16384];
 
@@ -20,6 +23,10 @@ public class MapData extends WorldSavedData
      * Holds a reference to the MapInfo of the players who own a copy of the map
      */
     public List playersArrayList = new ArrayList();
+    
+    
+    
+   
 
     /**
      * Holds a reference to the players who own a copy of the map and a reference to their MapInfo
@@ -105,6 +112,7 @@ public class MapData extends WorldSavedData
      */
     public void updateVisiblePlayers(EntityPlayer par1EntityPlayer, ItemStack par2ItemStack)
     {
+    	
         if (!this.playersHashMap.containsKey(par1EntityPlayer))
         {
             MapInfo var3 = new MapInfo(this, par1EntityPlayer);
@@ -202,6 +210,7 @@ public class MapData extends WorldSavedData
      */
     public byte[] getUpdatePacketData(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
     {
+ 
         MapInfo var4 = (MapInfo)this.playersHashMap.get(par3EntityPlayer);
         return var4 == null ? null : var4.getPlayersOnMap(par1ItemStack);
     }
@@ -212,6 +221,7 @@ public class MapData extends WorldSavedData
      */
     public void setColumnDirty(int par1, int par2, int par3)
     {
+    	
         super.markDirty();
 
         for (int var4 = 0; var4 < this.playersArrayList.size(); ++var4)
@@ -235,6 +245,7 @@ public class MapData extends WorldSavedData
      */
     public void updateMPMapData(byte[] par1ArrayOfByte)
     {
+
         int var2;
 
         if (par1ArrayOfByte[0] == 0)
@@ -270,6 +281,7 @@ public class MapData extends WorldSavedData
 
     public MapInfo func_82568_a(EntityPlayer par1EntityPlayer)
     {
+    	
         MapInfo var2 = (MapInfo)this.playersHashMap.get(par1EntityPlayer);
 
         if (var2 == null)

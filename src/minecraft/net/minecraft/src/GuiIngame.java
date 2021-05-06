@@ -412,6 +412,7 @@ public class GuiIngame extends Gui
                     GuiPlayerInfo var48 = (GuiPlayerInfo)var44.get(var21);
                     ScorePlayerTeam var49 = this.mc.theWorld.getScoreboard().getPlayersTeam(var48.name);
                     String var50 = ScorePlayerTeam.formatPlayerName(var49, var48.name);
+                    System.out.println(var50);
                     var8.drawStringWithShadow(var50, var22, var23, 16777215);
 
                     if (var40 != null)

@@ -35,6 +35,8 @@ public class Help extends Command {
 		Client.addChatMessage(".Stack - Stacks item in hand to 64");
 		Client.addChatMessage(".HorseStats - Checks horsestats");
 		Client.addChatMessage(".username <name> - Changes username");
+		Client.addChatMessage(".Friend <username> - Adds friend");
+	
 	}
 	}
 		

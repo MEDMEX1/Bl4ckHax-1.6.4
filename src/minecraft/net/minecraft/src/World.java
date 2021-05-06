@@ -10,7 +10,6 @@ import java.util.Random;
 import java.util.Set;
 
 import MEDMEX.Client;
-import MEDMEX.modules.Player.Crash;
 import net.minecraft.server.MinecraftServer;
 
 public abstract class World implements IBlockAccess
@@ -20,6 +19,7 @@ public abstract class World implements IBlockAccess
 	public static boolean donkeyfinder = false;
 	public static boolean visualrange = false;
 	public Minecraft mc = Minecraft.getMinecraft();
+	public static boolean logoutspots = false;
     /**
      * boolean; if true updates scheduled by scheduleBlockUpdate happen immediately
      */
@@ -1451,10 +1451,10 @@ public abstract class World implements IBlockAccess
                 this.playerEntities.add(var5);
                 this.updateAllPlayersSleepingFlag();
                 if(visualrange) {
-                	
+                	if(mc.thePlayer != null) {
                 	if(var5.username != Minecraft.thePlayer.username) {
                 Client.addChatMessage(var5.username+" has entered visual range");
-                	
+                	}
                 
                 
                 	}
@@ -1513,8 +1513,23 @@ public abstract class World implements IBlockAccess
         	if(visualrange) {
         		if(var5.username != Minecraft.thePlayer.username) {
         	Client.addChatMessage(var5.username+" has left visual range");
-        		}
+        		
         	}
+        	}
+        	if(logoutspots) {
+        		String playersinserver = "";
+        		List players = mc.thePlayer.sendQueue.playerInfoList;
+        		for(int i=0; i < players.size(); i++) {
+        			GuiPlayerInfo var48 = (GuiPlayerInfo)players.get(i);
+        			playersinserver+= var48.name;
+        		}
+        		if(!(playersinserver.contains(var5.username))) {
+        			Client.addChatMessage(var5.username+" Logged out at: "+var5.posX+", "+var5.posY+", "+var5.posZ);
+        		}
+        		
+        	}
+        	
+        	
         	
             this.playerEntities.remove(par1Entity);
             this.updateAllPlayersSleepingFlag();

@@ -3,12 +3,16 @@ package net.minecraft.src;
 import java.util.ArrayList;
 import java.util.List;
 
+import MEDMEX.Client;
+
 public class PlayerManager
 {
     private final WorldServer theWorldServer;
 
     /** players in the current instance */
     private final List players = new ArrayList();
+    
+   
 
     /**
      * A map of chunk position (two ints concatenated into a long) to PlayerInstance
@@ -213,6 +217,7 @@ public class PlayerManager
      */
     public void removePlayer(EntityPlayerMP par1EntityPlayerMP)
     {
+    	
         int var2 = (int)par1EntityPlayerMP.managedPosX >> 4;
         int var3 = (int)par1EntityPlayerMP.managedPosZ >> 4;
 

@@ -2,7 +2,6 @@ package MEDMEX;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
@@ -34,7 +33,7 @@ public class Client {
 	
 	public static String friendslist = "";
 	public static ClickGui clickgui = new ClickGui();
-	public static String name = "Bl4ckHax", version = "10.0";
+	public static String name = "Bl4ckHax", version = "X";
 	public static CopyOnWriteArrayList<Module> modules = new CopyOnWriteArrayList<Module>();
 	public static HUD hud = new HUD();
 	public static CommandManager commandManager = new CommandManager();
@@ -108,14 +107,13 @@ public class Client {
 		modules.add(new EzInf());
 		modules.add(new FastUse());
 		modules.add(new FastBow());
-		modules.add(new Crash());
 		modules.add(new OwnerTags());
 		modules.add(new TaxiFly());
 		modules.add(new NameProtect());
 		modules.add(new Phase());
-		modules.add(new Jesus2());
 		modules.add(new Search());
 		modules.add(new Derp());
+		modules.add(new LogoutSpots());
 		
 		Config.load();
 		
