@@ -23,11 +23,11 @@ public class Friend extends Command {
 
 	@Override
 	public void onCommand(String[] args, String command) {
+		try {
 			String thisLine = null;
 			try {
 				BufferedReader reader = new BufferedReader(new FileReader(new File(configfiledir)));
 				while((thisLine = reader.readLine()) !=null) {
-					System.out.println(thisLine);
 					Client.friendslist += thisLine;
 				}
 			}catch(Exception e) {
@@ -42,7 +42,10 @@ public class Friend extends Command {
 			
 			
 		
+		} catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
+			Client.addChatMessage("Usage: Friend <username>");
 		}
+	}
 	}
 	
 

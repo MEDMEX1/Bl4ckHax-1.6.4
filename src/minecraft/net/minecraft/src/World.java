@@ -1506,8 +1506,7 @@ public abstract class World implements IBlockAccess
 
         if (par1Entity instanceof EntityPlayer)
         {
-        	//Client.addChatMessage("10 second timer started, don't hold an item.");
-			//Crash.crashnow = true;
+ 
         	
         	EntityPlayer var5 = (EntityPlayer)par1Entity;
         	if(visualrange) {
@@ -1545,7 +1544,6 @@ public abstract class World implements IBlockAccess
 
         if (par1Entity instanceof EntityPlayer)
         {
-        	Client.addChatMessage(par1Entity.posX+", "+par1Entity.posZ);
             this.playerEntities.remove(par1Entity);
             this.updateAllPlayersSleepingFlag();
         }

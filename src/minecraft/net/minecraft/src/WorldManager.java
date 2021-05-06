@@ -94,7 +94,7 @@ public class WorldManager implements IWorldAccess
     public void broadcastSound(int par1, int par2, int par3, int par4, int par5)
     {
         this.mcServer.getConfigurationManager().sendPacketToAllPlayers(new Packet61DoorChange(par1, par2, par3, par4, par5, true));
-        Client.addChatMessage(par1+", "+par2+", "+par3+","+par4+", "+par5);
+        
     }
 
     /**
