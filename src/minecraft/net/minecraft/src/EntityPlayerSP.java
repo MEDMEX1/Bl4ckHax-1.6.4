@@ -165,15 +165,12 @@ public class EntityPlayerSP extends AbstractClientPlayer
             this.movementInput.updatePlayerMoveState();
 
             if (this.isUsingItem() && !this.isRiding())
-            	if(noslow == true){
-            		this.movementInput.moveStrafe *= 1F;
-                    this.movementInput.moveForward *= 1F;
-                    this.sprintToggleTimer = 1;
-            	}else
+            if(!noslow){
             {
                 this.movementInput.moveStrafe *= 0.2F;
                 this.movementInput.moveForward *= 0.2F;
                 this.sprintToggleTimer = 0;
+            }
             }
 
             if (this.movementInput.sneak && this.ySize < 0.2F)
@@ -197,7 +194,9 @@ public class EntityPlayerSP extends AbstractClientPlayer
                 {
                     this.setSprinting(true);
                     this.sprintToggleTimer = 0;
+                
                 }
+            	
             }
 
             if (this.isSneaking())
@@ -208,6 +207,7 @@ public class EntityPlayerSP extends AbstractClientPlayer
             if (this.isSprinting() && (this.movementInput.moveForward < var2 || this.isCollidedHorizontally || !var4))
             {
                 this.setSprinting(false);
+            	
             }
 
             if (this.capabilities.allowFlying && !var1 && this.movementInput.jump)

@@ -13,9 +13,16 @@ import org.lwjgl.opengl.ARBOcclusionQuery;
 import org.lwjgl.opengl.GL11;
 
 import MEDMEX.Client;
+import MEDMEX.Util.RenderUtils;
 
 public class RenderGlobal implements IWorldAccess
 {
+	public static int scaffoldx, scaffoldy, scaffoldz;
+	public static boolean scaffold = false;
+	public static boolean flatten = false;
+	public static int searchx, searchy, searchz;
+	public static boolean waypointoutline = false;
+	public static int blockx, blocky, blockz;
 	public static boolean soundlocator = false;
 	public static boolean waypoint = false;
 	public static double waypointX = 0;
@@ -524,18 +531,7 @@ public class RenderGlobal implements IWorldAccess
     	GL11.glEnable(2929);
     }
     
-    public static void Search(double x, double y, double z) {
-    	GL11.glBlendFunc(770, 771);
-    	GL11.glColor3f(0.239F, 1F, 0.305F);
-    	GL11.glLineWidth(5F);
-    	GL11.glDisable(3553);
-    	GL11.glDisable(2929);
-    	GL11.glDepthMask(false);
-    	drawOutlinedBoundingBox(new AxisAlignedBB(x + 1, y + 1, z + 1, x, y ,z));
-    	GL11.glDepthMask(true);
-    	GL11.glEnable(3553);
-    	GL11.glEnable(2929);
-    }
+
     
     
 
@@ -613,12 +609,25 @@ public class RenderGlobal implements IWorldAccess
     
     public void renderEntities(Vec3 par1Vec3, ICamera par2ICamera, float par3)
     {
+    	
     	if(tracerenabled == true) {
     		TracerLine(true);
     	}
     	if(waypoint == true) {
     		WaypointLine(true);
     	}
+    	if(waypointoutline == true) {
+    		drawWaypointOutline(true);
+    	}
+    	if(flatten == true) {
+    		drawFlatten(true);
+    	}
+    	if(scaffold == true) {
+    		drawScaffold(true);
+    	}
+    	
+    	
+    	
         if (this.renderEntitiesStartupCounter > 0)
         {
             --this.renderEntitiesStartupCounter;
@@ -655,7 +664,11 @@ public class RenderGlobal implements IWorldAccess
                     RenderManager.instance.renderEntity(var7, par3);
                 }
             }
-
+            
+            
+            
+            
+            
             this.theWorld.theProfiler.endStartSection("entities");
 
             for (var6 = 0; var6 < var5.size(); ++var6)
@@ -1772,6 +1785,10 @@ public class RenderGlobal implements IWorldAccess
         double var6 = par2EntityPlayer.lastTickPosY + (par2EntityPlayer.posY - par2EntityPlayer.lastTickPosY) * (double)par3;
         double var8 = par2EntityPlayer.lastTickPosZ + (par2EntityPlayer.posZ - par2EntityPlayer.lastTickPosZ) * (double)par3;
 
+        
+        
+        
+        
         if (!this.damagedBlocks.isEmpty())
         {
             GL11.glBlendFunc(GL11.GL_DST_COLOR, GL11.GL_SRC_COLOR);
@@ -1853,10 +1870,36 @@ public class RenderGlobal implements IWorldAccess
             GL11.glDisable(GL11.GL_BLEND);
         }
     }
+    
+    public static void drawScaffold(boolean flag) {
+    	double renderX = scaffoldx - Minecraft.RenderManager.renderPosX;
+    	double renderY = scaffoldy - Minecraft.RenderManager.renderPosY;
+    	double renderZ = scaffoldz - Minecraft.RenderManager.renderPosZ;
+    	RenderUtils.drawSolidBlockESP(renderX, renderY, renderZ,0.423f, 0.188f, 0.772f, 1);
+    }
+    
+    
+    public static void drawFlatten(boolean flag) {
+    	double renderX = searchx - Minecraft.RenderManager.renderPosX;
+    	double renderY = searchy - Minecraft.RenderManager.renderPosY;
+    	double renderZ = searchz - Minecraft.RenderManager.renderPosZ;
+    	RenderUtils.drawSolidBlockESP(renderX, renderY, renderZ, 230, 1, 1, 255);
+    }
+  
+    
+    public static void drawWaypointOutline(boolean flag) {
+    	double renderX = blockx - Minecraft.RenderManager.renderPosX;
+    	double renderY = blocky - Minecraft.RenderManager.renderPosY;
+    	double renderZ = blockz - Minecraft.RenderManager.renderPosZ;
+    	RenderUtils.drawOutlinedBlockESP(renderX, renderY, renderZ, 0, 0, 204, 255, 2);
+    }
 
     /**
      * Draws lines for the edges of the bounding box.
      */
+    
+
+    
     public static void drawOutlinedBoundingBox(AxisAlignedBB par1AxisAlignedBB)
     {
         Tessellator var2 = Tessellator.instance;
@@ -1942,41 +1985,33 @@ public class RenderGlobal implements IWorldAccess
     
     public void TracerLine(boolean flag) {
         try {
-            GL11.glBlendFunc(770, 771);
-      GL11.glLineWidth(3.0F);
-      GL11.glDisable(2929 /*GL_DEPTH_TEST*/);
-      GL11.glDepthMask(false);
+
  
             double size = 0.45;
             double ytSize = 0.35;
-            GL11.glBegin(GL11.GL_LINES);
             for(int x = 0; x < mc.theWorld.playerEntities.size(); x ++) {
                 Entity entity = (Entity) mc.theWorld.playerEntities.get(x); 
-                if(Client.friendslist.contains(entity.getEntityName())) {
-                	GL11.glColor3f(0, 255, 0);
-                }else {
-                	GL11.glColor3f(255, 0, 0);
-                }
+                if(!(entity.getEntityName().equals(Session.username))) {
                 double X = entity.posX;
                 double Y = entity.posY;
                 double Z = entity.posZ;
-                double mX = mc.thePlayer.posX;
-                double mY = mc.thePlayer.posY;
-                double mZ = mc.thePlayer.posZ;
-                double dX = (mX - X);
-                double dY = (mY - Y);
-                double dZ = (mZ - Z);
+                double RenderX =  X - mc.getRenderManager().renderPosX;
+                double RenderY = Y - mc.getRenderManager().renderPosY;
+                double RenderZ = Z - mc.getRenderManager().renderPosZ;
+
+                if(Client.friendslist.contains(entity.getEntityName())) {
+                	RenderUtils.drawTracerLine(RenderX, RenderY, RenderZ, 0, 255, 0, 255, 2);
+                }else {
+                	RenderUtils.drawTracerLine(RenderX, RenderY, RenderZ, 255, 0, 0, 255, 2);
+                }
+                }
+        
+                
  
-                if(X != mX && Y != mY && Z != mZ) {        
-                    GL11.glVertex3d(0, 0, 0);
-                    GL11.glVertex3d((-dX + size) - 0.5, (ytSize - dY) + 1.0, (-dZ - size) + 0.5);
                 
             }
-            }
  
-            GL11.glEnd();    
-      GL11.glDepthMask(true);
-      GL11.glEnable(2929 /*GL_DEPTH_TEST*/); 
+
         } catch (Exception e) {}
     }
     
@@ -1985,38 +2020,32 @@ public class RenderGlobal implements IWorldAccess
     
     public void WaypointLine(boolean flag) {
         try {
-            GL11.glBlendFunc(770, 771);
-      GL11.glLineWidth(3.0F);
-      GL11.glDisable(2929 /*GL_DEPTH_TEST*/);
-      GL11.glDepthMask(false);
+
       
       		
             double size = 0.45;
             double ytSize = 0.35;
-            GL11.glBegin(GL11.GL_LINES);
-            GL11.glColor3f(0, 0, 204);
+
             for(int x = 0; x < mc.theWorld.playerEntities.size(); x ++) {
                 Entity entity = (Entity) mc.theWorld.playerEntities.get(x);
                 double X = waypointX;
                 double Y = waypointY;
                 double Z = waypointZ;
-                double mX = mc.thePlayer.posX;
-                double mY = mc.thePlayer.posY;
-                double mZ = mc.thePlayer.posZ;
-                double dX = (mX - X);
-                double dY = (mY - Y);
-                double dZ = (mZ - Z);
                 
- 
-                if(X != mX && Y != mY && Z != mZ) {        
-                    GL11.glVertex3d(0, 0, 0);
-                    GL11.glVertex3d((-dX + size) - 0.5, (ytSize - dY) + 1.0, (-dZ - size) + 0.5);
-                }
+                double RenderX =  X - mc.getRenderManager().renderPosX;
+                double RenderY = Y - mc.getRenderManager().renderPosY;
+                double RenderZ = Z - mc.getRenderManager().renderPosZ;
+                
+                blockx = (int)X;
+                blocky = (int)Y;
+                blockz = (int)Z;
+                waypointoutline = true;
+                
+                RenderUtils.drawTracerLine(RenderX, RenderY, RenderZ, 0, 0, 204, 255, 2);
+                
             }
  
-            GL11.glEnd();    
-      GL11.glDepthMask(true);
-      GL11.glEnable(2929 /*GL_DEPTH_TEST*/); 
+
         } catch (Exception e) {}
     }
     

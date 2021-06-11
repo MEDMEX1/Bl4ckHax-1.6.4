@@ -10,6 +10,7 @@ import net.minecraft.src.Minecraft;
 import net.minecraft.src.NetServerHandler;
 import net.minecraft.src.Packet10Flying;
 import net.minecraft.src.PlayerControllerMP;
+import net.minecraft.src.RenderGlobal;
 
 public class Flatten extends Module {
 	
@@ -26,6 +27,7 @@ public class Flatten extends Module {
 		EntityClientPlayerMP.flatten = false;
 		NetServerHandler.freecamenabled = false;
 		EntityClientPlayerMP.freecamenabled = false;
+		RenderGlobal.flatten = false;
 		
 		
 	}

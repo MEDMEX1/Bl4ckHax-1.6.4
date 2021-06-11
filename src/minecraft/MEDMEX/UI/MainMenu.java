@@ -13,6 +13,7 @@ import net.minecraft.src.ResourceLocation;
 
 
 public class MainMenu extends GuiScreen {
+	long timer = 1l;
 
 	public MainMenu() {
 		
@@ -22,7 +23,22 @@ public class MainMenu extends GuiScreen {
 		
 	}
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-		mc.getTextureManager().bindTexture(new ResourceLocation("background.png"));
+		timer++;
+		if(timer < 10*2) {
+		mc.getTextureManager().bindTexture(new ResourceLocation("background/frame_apngframe00"+timer/2+".png"));
+		}
+		if(timer >= 10*2 && timer < 100*2) {
+			mc.getTextureManager().bindTexture(new ResourceLocation("background/frame_apngframe0"+timer/2+".png"));
+		}
+		if(timer >= 100*2) {
+			mc.getTextureManager().bindTexture(new ResourceLocation("background/frame_apngframe"+timer/2+".png"));
+		}
+		if(timer == 147*2) {
+			timer = 1l;
+		}
+		
+		
+		
 		
 		this.drawModalRectWithCustomSizedTexture(0, 0, 0, 0, this.width, this.height, this.width, this.height);
 		

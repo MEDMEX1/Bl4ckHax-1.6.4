@@ -75,7 +75,9 @@ public class Module {
 		COMBAT("Combat"),
 		MOVEMENT("Movement"),
 		PLAYER("Player"),
-		RENDER("Render");
+		RENDER("Render"),
+		WORLD("World"),
+		MISC("Misc");
 		
 		public String name;
 		

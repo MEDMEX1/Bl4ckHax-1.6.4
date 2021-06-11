@@ -3,7 +3,8 @@ package net.minecraft.src;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import MEDMEX.Util.Render3D;
+import MEDMEX.Client;
+import MEDMEX.Util.RenderUtils;
 
 public class RenderBlocks
 {
@@ -309,6 +310,8 @@ public class RenderBlocks
      */
     public void setRenderBounds(double par1, double par3, double par5, double par7, double par9, double par11)
     {
+    	
+    	
         if (!this.lockBlockBounds)
         {
             this.renderMinX = par1;
@@ -344,6 +347,8 @@ public class RenderBlocks
      */
     public void overrideBlockBounds(double par1, double par3, double par5, double par7, double par9, double par11)
     {
+    	
+    	
         this.renderMinX = par1;
         this.renderMaxX = par7;
         this.renderMinY = par3;
@@ -368,6 +373,8 @@ public class RenderBlocks
     public void renderBlockUsingTexture(Block par1Block, int par2, int par3, int par4, Icon par5Icon)
     {
     	
+    	
+    	
         this.setOverrideBlockTexture(par5Icon);
         this.renderBlockByRenderType(par1Block, par2, par3, par4);
         this.clearOverrideBlockTexture();
@@ -378,6 +385,7 @@ public class RenderBlocks
      */
     public void renderBlockAllFaces(Block par1Block, int par2, int par3, int par4)
     {
+    	
  
     	
         this.renderAllFaces = true;
@@ -390,6 +398,11 @@ public class RenderBlocks
      */
     public boolean renderBlockByRenderType(Block par1Block, int par2, int par3, int par4)
     {
+    	
+    	
+    	
+    	
+    	
         int var5 = par1Block.getRenderType();
 
         if (var5 == -1)
@@ -7466,6 +7479,8 @@ public class RenderBlocks
      */
     public void renderFaceXPos(Block par1Block, double par2, double par4, double par6, Icon par8Icon)
     {
+    	
+    	
         Tessellator var9 = Tessellator.instance;
 
         if (this.hasOverrideBlockTexture())

@@ -171,7 +171,7 @@ public abstract class Container
             {
                 Slot var8 = (Slot)this.inventorySlots.get(par1);
 
-                if (var8 != null && func_94527_a(var8, var6.getItemStack(), true) && var8.isItemValid(var6.getItemStack()) && this.canDragIntoSlot(var8))
+                if (var8 != null && func_94527_a(var8, var6.getItemStack(), true) && var8.isItemValid(var6.getItemStack()) && var6.getItemStack().stackSize > this.field_94537_h.size() && this.canDragIntoSlot(var8))
                 {
                     this.field_94537_h.add(var8);
                 }
@@ -188,7 +188,7 @@ public abstract class Container
                     {
                         Slot var11 = (Slot)var10.next();
 
-                        if (var11 != null && func_94527_a(var11, var6.getItemStack(), true) && var11.isItemValid(var6.getItemStack()) && this.canDragIntoSlot(var11))
+                        if (var11 != null && func_94527_a(var11, var6.getItemStack(), true) && var11.isItemValid(var6.getItemStack()) && var6.getItemStack().stackSize >= this.field_94537_h.size() && this.canDragIntoSlot(var11))
                         {
                             ItemStack var12 = var17.copy();
                             int var13 = var11.getHasStack() ? var11.getStack().stackSize : 0;
@@ -211,7 +211,10 @@ public abstract class Container
 
                     var17.stackSize = var9;
 
-                   
+                    if (var17.stackSize <= 0)
+                    {
+                        var17 = null;
+                    }
 
                     var6.setItemStack(var17);
                 }
@@ -230,8 +233,8 @@ public abstract class Container
         else
         {
             Slot var16;
-            int var19;
-            ItemStack var22;
+            int var21;
+            ItemStack var23;
 
             if ((par3 == 0 || par3 == 1) && (par2 == 0 || par2 == 1))
             {
@@ -293,7 +296,7 @@ public abstract class Container
                     if (var16 != null)
                     {
                         var17 = var16.getStack();
-                        ItemStack var20 = var6.getItemStack();
+                        ItemStack var19 = var6.getItemStack();
 
                         if (var17 != null)
                         {
@@ -302,21 +305,21 @@ public abstract class Container
 
                         if (var17 == null)
                         {
-                            if (var20 != null && var16.isItemValid(var20))
+                            if (var19 != null && var16.isItemValid(var19))
                             {
-                                var19 = par2 == 0 ? var20.stackSize : 1;
+                                var21 = par2 == 0 ? var19.stackSize : 1;
 
-                                if (var19 > var16.getSlotStackLimit())
+                                if (var21 > var16.getSlotStackLimit())
                                 {
-                                    var19 = var16.getSlotStackLimit();
+                                    var21 = var16.getSlotStackLimit();
                                 }
 
-                                if (var20.stackSize >= var19)
+                                if (var19.stackSize >= var21)
                                 {
-                                    var16.putStack(var20.splitStack(var19));
+                                    var16.putStack(var19.splitStack(var21));
                                 }
 
-                                if (var20.stackSize == 0)
+                                if (var19.stackSize == 0)
                                 {
                                     var6.setItemStack((ItemStack)null);
                                 }
@@ -324,11 +327,11 @@ public abstract class Container
                         }
                         else if (var16.canTakeStack(par4EntityPlayer))
                         {
-                            if (var20 == null)
+                            if (var19 == null)
                             {
-                                var19 = par2 == 0 ? var17.stackSize : (var17.stackSize + 1) / 2;
-                                var22 = var16.decrStackSize(var19);
-                                var6.setItemStack(var22);
+                                var21 = par2 == 0 ? var17.stackSize : (var17.stackSize + 1) / 2;
+                                var23 = var16.decrStackSize(var21);
+                                var6.setItemStack(var23);
 
                                 if (var17.stackSize == 0)
                                 {
@@ -337,45 +340,45 @@ public abstract class Container
 
                                 var16.onPickupFromSlot(par4EntityPlayer, var6.getItemStack());
                             }
-                            else if (var16.isItemValid(var20))
+                            else if (var16.isItemValid(var19))
                             {
-                                if (var17.itemID == var20.itemID && var17.getItemDamage() == var20.getItemDamage() && ItemStack.areItemStackTagsEqual(var17, var20))
+                                if (var17.itemID == var19.itemID && var17.getItemDamage() == var19.getItemDamage() && ItemStack.areItemStackTagsEqual(var17, var19))
                                 {
-                                    var19 = par2 == 0 ? var20.stackSize : 1;
+                                    var21 = par2 == 0 ? var19.stackSize : 1;
 
-                                    if (var19 > var16.getSlotStackLimit() - var17.stackSize)
+                                    if (var21 > var16.getSlotStackLimit() - var17.stackSize)
                                     {
-                                        var19 = var16.getSlotStackLimit() - var17.stackSize;
+                                        var21 = var16.getSlotStackLimit() - var17.stackSize;
                                     }
 
-                                    if (var19 > var20.getMaxStackSize() - var17.stackSize)
+                                    if (var21 > var19.getMaxStackSize() - var17.stackSize)
                                     {
-                                        var19 = var20.getMaxStackSize() - var17.stackSize;
+                                        var21 = var19.getMaxStackSize() - var17.stackSize;
                                     }
 
-                                    var20.splitStack(var19);
+                                    var19.splitStack(var21);
 
-                                    if (var20.stackSize == 0)
+                                    if (var19.stackSize == 0)
                                     {
                                         var6.setItemStack((ItemStack)null);
                                     }
 
-                                    var17.stackSize += var19;
+                                    var17.stackSize += var21;
                                 }
-                                else if (var20.stackSize <= var16.getSlotStackLimit())
+                                else if (var19.stackSize <= var16.getSlotStackLimit())
                                 {
-                                    var16.putStack(var20);
+                                    var16.putStack(var19);
                                     var6.setItemStack(var17);
                                 }
                             }
-                            else if (var17.itemID == var20.itemID && var20.getMaxStackSize() > 1 && (!var17.getHasSubtypes() || var17.getItemDamage() == var20.getItemDamage()) && ItemStack.areItemStackTagsEqual(var17, var20))
+                            else if (var17.itemID == var19.itemID && var19.getMaxStackSize() > 1 && (!var17.getHasSubtypes() || var17.getItemDamage() == var19.getItemDamage()) && ItemStack.areItemStackTagsEqual(var17, var19))
                             {
-                                var19 = var17.stackSize;
+                                var21 = var17.stackSize;
 
-                                if (var19 > 0 && var19 + var20.stackSize <= var20.getMaxStackSize())
+                                if (var21 > 0 && var21 + var19.stackSize <= var19.getMaxStackSize())
                                 {
-                                    var20.stackSize += var19;
-                                    var17 = var16.decrStackSize(var19);
+                                    var19.stackSize += var21;
+                                    var17 = var16.decrStackSize(var21);
 
                                     if (var17.stackSize == 0)
                                     {
@@ -399,34 +402,34 @@ public abstract class Container
                 {
                     var17 = var6.getStackInSlot(par2);
                     boolean var18 = var17 == null || var16.inventory == var6 && var16.isItemValid(var17);
-                    var19 = -1;
+                    var21 = -1;
 
                     if (!var18)
                     {
-                        var19 = var6.getFirstEmptyStack();
-                        var18 |= var19 > -1;
+                        var21 = var6.getFirstEmptyStack();
+                        var18 |= var21 > -1;
                     }
 
                     if (var16.getHasStack() && var18)
                     {
-                        var22 = var16.getStack();
-                        var6.setInventorySlotContents(par2, var22.copy());
+                        var23 = var16.getStack();
+                        var6.setInventorySlotContents(par2, var23.copy());
 
                         if ((var16.inventory != var6 || !var16.isItemValid(var17)) && var17 != null)
                         {
-                            if (var19 > -1)
+                            if (var21 > -1)
                             {
                                 var6.addItemStackToInventory(var17);
-                                var16.decrStackSize(var22.stackSize);
+                                var16.decrStackSize(var23.stackSize);
                                 var16.putStack((ItemStack)null);
-                                var16.onPickupFromSlot(par4EntityPlayer, var22);
+                                var16.onPickupFromSlot(par4EntityPlayer, var23);
                             }
                         }
                         else
                         {
-                            var16.decrStackSize(var22.stackSize);
+                            var16.decrStackSize(var23.stackSize);
                             var16.putStack(var17);
-                            var16.onPickupFromSlot(par4EntityPlayer, var22);
+                            var16.onPickupFromSlot(par4EntityPlayer, var23);
                         }
                     }
                     else if (!var16.getHasStack() && var17 != null && var16.isItemValid(var17))
@@ -466,15 +469,15 @@ public abstract class Container
                 if (var17 != null && (var16 == null || !var16.getHasStack() || !var16.canTakeStack(par4EntityPlayer)))
                 {
                     var9 = par2 == 0 ? 0 : this.inventorySlots.size() - 1;
-                    var19 = par2 == 0 ? 1 : -1;
+                    var21 = par2 == 0 ? 1 : -1;
 
-                    for (int var21 = 0; var21 < 2; ++var21)
+                    for (int var20 = 0; var20 < 2; ++var20)
                     {
-                        for (int var23 = var9; var23 >= 0 && var23 < this.inventorySlots.size() && var17.stackSize < var17.getMaxStackSize(); var23 += var19)
+                        for (int var22 = var9; var22 >= 0 && var22 < this.inventorySlots.size() && var17.stackSize < var17.getMaxStackSize(); var22 += var21)
                         {
-                            Slot var24 = (Slot)this.inventorySlots.get(var23);
+                            Slot var24 = (Slot)this.inventorySlots.get(var22);
 
-                            if (var24.getHasStack() && func_94527_a(var24, var17, true) && var24.canTakeStack(par4EntityPlayer) && this.func_94530_a(var17, var24) && (var21 != 0 || var24.getStack().stackSize != var24.getStack().getMaxStackSize()))
+                            if (var24.getHasStack() && func_94527_a(var24, var17, true) && var24.canTakeStack(par4EntityPlayer) && this.func_94530_a(var17, var24) && (var20 != 0 || var24.getStack().stackSize != var24.getStack().getMaxStackSize()))
                             {
                                 int var14 = Math.min(var17.getMaxStackSize() - var17.stackSize, var24.getStack().stackSize);
                                 ItemStack var15 = var24.decrStackSize(var14);
@@ -639,7 +642,7 @@ public abstract class Container
             }
         }
 
-       
+        if (par1ItemStack.stackSize > 0)
         {
             if (par4)
             {

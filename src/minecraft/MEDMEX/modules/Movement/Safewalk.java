@@ -8,6 +8,7 @@ import MEDMEX.modules.Module;
 import net.minecraft.src.Entity;
 
 public class Safewalk extends Module {
+	public static boolean safewalk = false;
 	
 	public Safewalk() {
 		super("Safewalk", Keyboard.KEY_J, Category.MOVEMENT);
@@ -16,10 +17,12 @@ public class Safewalk extends Module {
 	@Override
 	public void onEnable() {
 		Entity.safewalkenabled = true;
+		safewalk = true;
 	}
 	
 	public void onDisable() {
 		Entity.safewalkenabled = false;
+		safewalk = false;
 	}
 	
 

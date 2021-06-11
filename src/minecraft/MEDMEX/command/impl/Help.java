@@ -24,6 +24,7 @@ public class Help extends Command {
 		Client.addChatMessage(".bookexploit - Creates a 127 book, must be holding book in hand");
 		Client.addChatMessage(".SpawnTP - Teleports you to spawn (doesn't work on macro)");
 		Client.addChatMessage(".Vclip <int> - Teleports you vertically");
+		Client.addChatMessage(".Hclip <int> - Teleports you horizontally");
 		Client.addChatMessage(".Throw <times> - Throws item in hand x amount of times");
 		Client.addChatMessage(".Waypoint <x> <y> <z> - Sets waypoint position to given coords");
 		Client.addChatMessage(".NetherCoords <x> <y> <z> - Converts overworld coords to nether coords");
@@ -36,6 +37,7 @@ public class Help extends Command {
 		Client.addChatMessage(".HorseStats - Checks horsestats");
 		Client.addChatMessage(".username <name> - Changes username");
 		Client.addChatMessage(".Friend <username> - Adds friend");
+		Client.addChatMessage(".info <username> - gives information about a player (only if they're in render distance)");
 	
 	}
 	}

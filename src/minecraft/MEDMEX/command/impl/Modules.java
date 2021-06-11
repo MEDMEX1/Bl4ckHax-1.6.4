@@ -37,12 +37,15 @@ public class Modules extends Command {
 			Client.addChatMessage("Scaffold");
 			Client.addChatMessage("Speed");
 			Client.addChatMessage("Sprint");
+			Client.addChatMessage("Step");
+			Client.addChatMessage("Strafe");
 			Client.addChatMessage("Taxifly");
 			Client.addChatMessage("Timer");
 			Client.addChatMessage("Tower");
 			Client.addChatMessage("--Player--");
 			Client.addChatMessage("AntiFall");
 			Client.addChatMessage("AntiPortalTrap");
+			Client.addChatMessage("AntiHunger");
 			Client.addChatMessage("AntiSS");
 			Client.addChatMessage("AutoEat");
 			Client.addChatMessage("AutoTunnel");

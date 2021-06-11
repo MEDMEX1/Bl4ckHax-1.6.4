@@ -3,6 +3,9 @@ package net.minecraft.src;
 import java.util.List;
 import java.util.Random;
 
+import MEDMEX.Client;
+import MEDMEX.Util.RenderUtils;
+
 public class Block {
 	/**
 	 * used as foreach item, if item.tab = current tab, display it on the screen
@@ -643,6 +646,10 @@ public class Block {
 	 * adjacent block is at the given coordinates. Args: blockAccess, x, y, z, side
 	 */
 	public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
+		
+		
+		
+		
 		if(xray == true) {
 			return blockID == 54 || blockID == 14 || blockID == 15 || blockID == 16 || blockID == 21 || blockID == 56 || blockID == 73 || blockID == 74 || blockID == 41 || blockID == 42 || blockID == 57 || blockID == 50 || blockID == 61 || blockID == 130 || blockID == 58 || blockID == 355 || blockID == 129;
 		}

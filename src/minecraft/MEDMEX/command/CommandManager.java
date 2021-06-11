@@ -52,6 +52,8 @@ public class CommandManager {
 		commands.add(new Info());
 		commands.add(new TP());
 		commands.add(new Friend());
+		commands.add(new Info());
+		commands.add(new Hclip());
 		
 	}
 	

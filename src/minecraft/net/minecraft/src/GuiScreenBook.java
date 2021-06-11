@@ -160,8 +160,8 @@ public class GuiScreenBook extends GuiScreen
                 if (par1)
                 {
                     var8 = "MC|BSign";
-                    this.itemstackBook.setTagInfo("author", new NBTTagString("author", newauthor));
-                    this.itemstackBook.setTagInfo("title", new NBTTagString("title", colortitle.trim()));
+                    this.itemstackBook.setTagInfo("author", new NBTTagString("author",newauthor));
+                    this.itemstackBook.setTagInfo("title", new NBTTagString("title", colortitle));
                     this.itemstackBook.itemID = Item.writtenBook.itemID;
                 }
 

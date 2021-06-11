@@ -11,6 +11,7 @@ import net.minecraft.src.NetServerHandler;
 import net.minecraft.src.Packet12PlayerLook;
 import net.minecraft.src.Packet13PlayerLookMove;
 import net.minecraft.src.Packet15Place;
+import net.minecraft.src.RenderGlobal;
 
 public class Tower extends Module {
 	public static long timer = 0l;
@@ -27,13 +28,13 @@ public class Tower extends Module {
 		
 	
 	public void onEnable() {
-		NetServerHandler.freecamenabled = true;
-		EntityClientPlayerMP.freecamenabled = true;
+		EntityClientPlayerMP.rotationoverride = true;
+
 	}
 	
 	public void onDisable() {
-		NetServerHandler.freecamenabled = false;
-		EntityClientPlayerMP.freecamenabled = false;
+		RenderGlobal.scaffold = false;
+		EntityClientPlayerMP.rotationoverride = false;
 	}
 	
 	
@@ -64,9 +65,12 @@ public class Tower extends Module {
 				
 				timer++;
 				mc.thePlayer.onGround = true;
+				RenderGlobal.scaffold = true;
+				RenderGlobal.scaffoldx = X+offsetX;
+				RenderGlobal.scaffoldy = (int)mc.thePlayer.posY-2;
+				RenderGlobal.scaffoldz = Z+offsetZ;
 				mc.thePlayer.sendQueue.addToSendQueue(new Packet15Place(X+offsetX, (int)mc.thePlayer.posY-3, Z+offsetZ, 1, Minecraft.thePlayer.inventory.getStackInSlot(Minecraft.thePlayer.inventory.currentItem), 0, 0 ,0));
-				mc.thePlayer.sendQueue.addToSendQueue(new Packet13PlayerLookMove(mc.thePlayer.posX, mc.thePlayer.boundingBox.minY, mc.thePlayer.posY, mc.thePlayer.posZ, 0f, 90f, mc.thePlayer.onGround));
-				//mc.thePlayer.sendQueue.addToSendQueue(new Packet12PlayerLook(0f, 90f, false));
+				EntityClientPlayerMP.custompitch = 90f;
 				mc.thePlayer.swingItem();
 				if(timer >= wait) {
 					if(count < 8) {

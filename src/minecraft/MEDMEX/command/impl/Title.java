@@ -14,8 +14,8 @@ public class Title extends Command {
 	@Override
 	public void onCommand(String[] args, String command) {
 		try {
-		GuiScreenBook.colortitle = args[0].replace("&", "ยง");
-		Client.addChatMessage("Changed title to: "+GuiScreenBook.colortitle.replace("&", "ยง"));
+		GuiScreenBook.colortitle = args[0].replace("&", "ง");
+		Client.addChatMessage("Changed title to: "+GuiScreenBook.colortitle.replace("&", "ง"));
 		} catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
 			Client.addChatMessage("Usage: Title <name>");
 		}

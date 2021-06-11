@@ -30,6 +30,7 @@ public class Waypoint extends Module {
 	
 	public void onDisable() {
 		RenderGlobal.waypoint = false;
+		RenderGlobal.waypointoutline = false;
 		
 	}
 	

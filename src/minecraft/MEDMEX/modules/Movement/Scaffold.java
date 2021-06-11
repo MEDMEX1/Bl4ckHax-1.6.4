@@ -7,6 +7,7 @@ import MEDMEX.events.Event;
 import MEDMEX.events.listeners.EventUpdate;
 import MEDMEX.modules.Module;
 import net.minecraft.src.BlockFluid;
+import net.minecraft.src.Entity;
 import net.minecraft.src.EntityClientPlayerMP;
 import net.minecraft.src.EnumFacing;
 import net.minecraft.src.Item;
@@ -18,6 +19,7 @@ import net.minecraft.src.Packet11PlayerPosition;
 import net.minecraft.src.Packet12PlayerLook;
 import net.minecraft.src.Packet13PlayerLookMove;
 import net.minecraft.src.Packet15Place;
+import net.minecraft.src.RenderGlobal;
 
 
 public class Scaffold extends Module {
@@ -36,7 +38,6 @@ public class Scaffold extends Module {
 	public static long uptimer = 0l;
 	public static long backtimer = 0l;
 	
-	public EnumFacing f;
 	public Scaffold() {
 		super("Scaffold" , Keyboard.KEY_C, Category.MOVEMENT);
 	}
@@ -50,8 +51,11 @@ public class Scaffold extends Module {
 
 	}
 	public void onDisable() {
+		if(!Safewalk.safewalk) {
+			Entity.safewalkenabled = false;
+		}
 		EntityClientPlayerMP.rotationoverride = false;
-		
+		RenderGlobal.scaffold = false;
 		
 
 	}
@@ -59,6 +63,7 @@ public class Scaffold extends Module {
 	public void onEvent(Event e) {
 		if(e instanceof EventUpdate) {
 			if(e.isPre()) {
+				Entity.safewalkenabled = true;
 				EntityClientPlayerMP.rotationoverride = true;
 				
 				
@@ -78,101 +83,88 @@ public class Scaffold extends Module {
 				if(mc.thePlayer.posX < 0 && mc.thePlayer.posZ > 0) {
 					offsetX = -1;
 					offsetZ =  0;
-				}
-				
-				
-				
-				int direction = MathHelper.floor_double((double)(this.mc.thePlayer.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+				}	
 				
 				X = (int)mc.thePlayer.posX;
 				Y = (int)mc.thePlayer.posY;
 				Z = (int)mc.thePlayer.posZ;
 				
-				int left = 0, right = 0, forward = 0, back = 0;
+				boolean movingX = false;
+				boolean movingZ = false;;
+				double posX = mc.thePlayer.posX;
+				double posZ = mc.thePlayer.posZ;
+				double decX = posX - X;
+				double decZ = posZ - Z;		
 				
-				//South
-				if(direction == 0) {
-					left = 5;
-					right = 4;
-					forward = 3;
-					back = 2;
-				}
-				//West
-				if(direction == 1) {
-					left = 3;
-					right = 2;
-					forward = 4;
-					back = 5;
-				}
-				//North
-				if(direction == 2) {
-					left = 4;
-					right = 5;
-					forward = 2;
-					back = 3;
-				}
-				//East
-				if(direction == 3) {
-					left = 2;
-					right = 3;
-					forward = 5;
-					back = 4;
-				}
-				
-				if(mc.gameSettings.keyBindLeft.pressed) {
-					lefttimer++;
-					EntityClientPlayerMP.customyaw = mc.thePlayer.cameraYaw-90;
-					EntityClientPlayerMP.custompitch = 90f;
-					if(lefttimer >= 1) {
-					mc.thePlayer.sendQueue.addToSendQueue(new Packet15Place(X+offsetX, Y-2, Z+offsetZ, left, Minecraft.thePlayer.inventory.getStackInSlot(Minecraft.thePlayer.inventory.currentItem), 0, 0 ,0));
-					mc.thePlayer.swingItem();
-					lefttimer = 0l;
+				if(decX < 0.3 || decX > 0.7 || decX < -0.7 || decX > -0.3){
+					//+X
+					if(mc.thePlayer.motionX > 0.02) {
+						if(mc.theWorld.isAirBlock(X+offsetX+1, Y-2, Z+offsetZ)) {
+							RenderGlobal.scaffold = true;
+							RenderGlobal.scaffoldx = X+offsetX+2;
+							RenderGlobal.scaffoldy = Y-2;
+							RenderGlobal.scaffoldz = Z+offsetZ;
+							mc.thePlayer.swingItem();
+							EntityClientPlayerMP.custompitch = 90f;
+							EntityClientPlayerMP.customyaw = -90f;
+							mc.thePlayer.sendQueue.addToSendQueue(new Packet15Place(X+offsetX, Y-2, Z+offsetZ, 5, Minecraft.thePlayer.inventory.getStackInSlot(Minecraft.thePlayer.inventory.currentItem), 0, 0 ,0));
+						}
+					}
+					//-X
+					if(mc.thePlayer.motionX < -0.02) {
+						if(mc.theWorld.isAirBlock(X+offsetX-1, Y-2, Z+offsetZ)) {
+							RenderGlobal.scaffold = true;
+							RenderGlobal.scaffoldx = X+offsetX-2;
+							RenderGlobal.scaffoldy = Y-2;
+							RenderGlobal.scaffoldz = Z+offsetZ;
+							mc.thePlayer.swingItem();
+							EntityClientPlayerMP.custompitch = 90f;
+							EntityClientPlayerMP.customyaw = 90f;
+							mc.thePlayer.sendQueue.addToSendQueue(new Packet15Place(X+offsetX, Y-2, Z+offsetZ, 4, Minecraft.thePlayer.inventory.getStackInSlot(Minecraft.thePlayer.inventory.currentItem), 0, 0 ,0));
+						}
 					}
 				}
-				if(mc.gameSettings.keyBindRight.pressed) {
-					righttimer++;
-					EntityClientPlayerMP.customyaw = mc.thePlayer.cameraYaw+90;
-					EntityClientPlayerMP.custompitch = 90f;
-					if(righttimer >= 1) {
-					mc.thePlayer.sendQueue.addToSendQueue(new Packet15Place(X+offsetX, Y-2, Z+offsetZ, right, Minecraft.thePlayer.inventory.getStackInSlot(Minecraft.thePlayer.inventory.currentItem), 0, 0 ,0));
-					mc.thePlayer.swingItem();
+				if(decZ < 0.3 || decZ > 0.7 || decZ < -0.7 || decZ > -0.3) {
+					//+Z
+					if(mc.thePlayer.motionZ > 0.02) {
+						if(mc.theWorld.isAirBlock(X+offsetX, Y-2, Z+offsetZ+1)) {
+							RenderGlobal.scaffold = true;
+							RenderGlobal.scaffoldx = X+offsetX;
+							RenderGlobal.scaffoldy = Y-2;
+							RenderGlobal.scaffoldz = Z+offsetZ+2;
+							mc.thePlayer.swingItem();
+							EntityClientPlayerMP.custompitch = 90f;
+							EntityClientPlayerMP.customyaw = 0f;
+							mc.thePlayer.sendQueue.addToSendQueue(new Packet15Place(X+offsetX, Y-2, Z+offsetZ, 3, Minecraft.thePlayer.inventory.getStackInSlot(Minecraft.thePlayer.inventory.currentItem), 0, 0 ,0));
+						}
+					}
+					//-Z
+					if(mc.thePlayer.motionZ < -0.02) {
+						if(mc.theWorld.isAirBlock(X+offsetX, Y-2, Z+offsetZ-1)) {
+							mc.thePlayer.swingItem();
+							RenderGlobal.scaffold = true;
+							RenderGlobal.scaffoldx = X+offsetX;
+							RenderGlobal.scaffoldy = Y-2;
+							RenderGlobal.scaffoldz = Z+offsetZ-2;
+							EntityClientPlayerMP.custompitch = 90f;
+							EntityClientPlayerMP.customyaw = 180f;
+							mc.thePlayer.sendQueue.addToSendQueue(new Packet15Place(X+offsetX, Y-2, Z+offsetZ, 2, Minecraft.thePlayer.inventory.getStackInSlot(Minecraft.thePlayer.inventory.currentItem), 0, 0 ,0));
+						}
+					}
+					//jump
+					if(mc.theWorld.isAirBlock(X+offsetX, Y-2, Z+offsetZ)) {
+						EntityClientPlayerMP.customyaw = mc.thePlayer.rotationYaw;
+						EntityClientPlayerMP.custompitch = 90f;
+						RenderGlobal.scaffold = true;
+						RenderGlobal.scaffoldx = X+offsetX;
+						RenderGlobal.scaffoldy = Y-2;
+						RenderGlobal.scaffoldz = Z+offsetZ;
+						mc.thePlayer.sendQueue.addToSendQueue(new Packet15Place(X+offsetX, Y-3, Z+offsetZ, 1, Minecraft.thePlayer.inventory.getStackInSlot(Minecraft.thePlayer.inventory.currentItem), 0, 0 ,0));
+						mc.thePlayer.swingItem();
+					}
 					
-					righttimer = 0l;
-					}
-				}
-				if(mc.gameSettings.keyBindForward.pressed) {
-					uptimer++;
-					EntityClientPlayerMP.customyaw = mc.thePlayer.cameraYaw;
-					EntityClientPlayerMP.custompitch = 90f;
-					if(uptimer >= 1) {
-					mc.thePlayer.sendQueue.addToSendQueue(new Packet15Place(X+offsetX, Y-2, Z+offsetZ, forward, Minecraft.thePlayer.inventory.getStackInSlot(Minecraft.thePlayer.inventory.currentItem), 0, 0 ,0));
-					mc.thePlayer.swingItem();
-					uptimer = 0l;
-					}
-				}
-				if(mc.gameSettings.keyBindBack.pressed) {
-					backtimer++;
-					EntityClientPlayerMP.customyaw = mc.thePlayer.cameraYaw-180;
-					EntityClientPlayerMP.custompitch = 90f;
-					if(backtimer >= 1) {
-					mc.thePlayer.sendQueue.addToSendQueue(new Packet15Place(X+offsetX, Y-2, Z+offsetZ, back, Minecraft.thePlayer.inventory.getStackInSlot(Minecraft.thePlayer.inventory.currentItem), 0, 0 ,0));
-					mc.thePlayer.swingItem();
-					backtimer = 0l;
-					}
-				}
-				if(mc.theWorld.isAirBlock(X, Y-2, Z)) {
-					jump = true;
-				}
-				if(jump) {
-					EntityClientPlayerMP.customyaw = mc.thePlayer.rotationYaw;
-					EntityClientPlayerMP.custompitch = 90f;
-					mc.thePlayer.sendQueue.addToSendQueue(new Packet15Place(X+offsetX, Y-3, Z+offsetZ, 1, Minecraft.thePlayer.inventory.getStackInSlot(Minecraft.thePlayer.inventory.currentItem), 0, 0 ,0));
-					mc.thePlayer.swingItem();
-					jumptimer++;
-					if(jumptimer >= 3) {
-						jumptimer = 0l;
-						jump = false;
-					}
+					
+					
 				}
 				
 				
@@ -180,11 +172,12 @@ public class Scaffold extends Module {
 				
 				
 				
-				
-				}
+			}
+			
 			}
 		}
 	}
+	
 
 
 

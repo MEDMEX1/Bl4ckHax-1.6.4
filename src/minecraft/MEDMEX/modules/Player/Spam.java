@@ -31,12 +31,10 @@ public class Spam extends Module {
 		if(e instanceof EventUpdate) {
 			if(e.isPre()) {
 				timer++;
-				if(timer == 60l) {
-					Minecraft.thePlayer.sendChatMessage("/party create MinFaggot");
-					Minecraft.thePlayer.sendChatMessage("/party invite MinistroMinhoca");
-					Minecraft.thePlayer.sendChatMessage("/party disband");
+				if(timer == 23l) {
+					int randomnum = (int) Math.floor(Math.random()*(99-0+1)+0);
+					mc.thePlayer.sendChatMessage("Get Bl4ckHax at: https://discord.gg/epWxDheBBB ("+randomnum+")");
 					timer = 0l;
-					
 					
 				}
 				

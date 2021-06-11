@@ -44,5 +44,7 @@ public final class Wrapper {
 	public synchronized void sendPacket(final Packet packet) {
 		getPlayer().sendQueue.addToSendQueue(packet);
 	}
+	
+	
 
 }

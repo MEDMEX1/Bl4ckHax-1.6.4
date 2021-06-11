@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GLContext;
 import org.lwjgl.util.glu.Project;
 
 import MEDMEX.Client;
-import MEDMEX.modules.Render.NoWeather;
+import MEDMEX.modules.World.NoWeather;
 
 public class EntityRenderer
 {

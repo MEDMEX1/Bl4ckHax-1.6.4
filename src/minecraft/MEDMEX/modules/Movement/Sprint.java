@@ -27,7 +27,7 @@ public class Sprint extends Module {
 		if(e instanceof EventUpdate) {
 			if(e.isPre()) {
 				
-				if(mc.thePlayer.moveForward > 0 && !mc.thePlayer.isUsingItem() && !mc.thePlayer.isSneaking() && !mc.thePlayer.isCollidedHorizontally)
+				if(mc.thePlayer.moveForward > 0.1 && !mc.thePlayer.isSneaking() && !mc.thePlayer.isCollidedHorizontally)
 				mc.thePlayer.setSprinting(true);
 				
 			}

@@ -23,6 +23,7 @@ import net.minecraft.src.ScaledResolution;
 import net.minecraft.src.Session;
 
 public class HUD {
+	public static boolean clickgui;
 	long timer = 0;
 	public static boolean infoenabled = false;
 	public static int itemcount = 0;
@@ -61,7 +62,7 @@ public class HUD {
 			double speed2 = speed * mc.timer.timerSpeed;
 			BigDecimal speed3 = new BigDecimal(speed2).setScale(1, RoundingMode.HALF_UP);
 			
-			
+			if(!clickgui) {
 			if(GameSettings.showDebugInfo == false) {
 			int xCoord = (int) Minecraft.thePlayer.posX;
 			int yCoord = (int) Minecraft.thePlayer.posY;
@@ -91,6 +92,7 @@ public class HUD {
 			mc.fontRenderer.drawStringWithShadow("Speed: "+speed3, 4, 44, ColorUtil.getRainbow(4, 1.0f, 1, -400));
 		
 			}
+			}
 		}
 
 		
@@ -100,6 +102,7 @@ public class HUD {
 		FontRenderer fr = mc.fontRenderer;
 		
 		Collections.sort(Client.modules, new ModuleComparator());
+		if(!clickgui) {
 		if(GameSettings.showDebugInfo == false) {
 		mc.fontRenderer.drawStringWithShadow(Client.name + " "+ Client.version, 4, 4, ColorUtil.getRainbow(4, 1.0f, 1, 1));
 		}
@@ -110,11 +113,14 @@ public class HUD {
 			
 			if(!m.toggled)
 				continue;	
+			if(!clickgui) {
 			if(GameSettings.showDebugInfo == false) {
 			mc.fontRenderer.drawStringWithShadow(m.name + m.attribute, sr.getScaledWidth() - fr.getStringWidth(m.name + m.attribute) - 4, 4 + count * (fr.FONT_HEIGHT + 2), ColorUtil.getRainbow(4, 1.0f, 1, count * -100));
 			}
+			}
 			count++;
 			
+		}
 		}
 		
 		

@@ -1,12 +1,15 @@
 package net.minecraft.src;
 
 import MEDMEX.Client;
+import MEDMEX.Util.RenderUtils;
 import MEDMEX.config.Silent;
 import MEDMEX.events.listeners.EventChat;
 import MEDMEX.events.listeners.EventMotion;
 
 public class EntityClientPlayerMP extends EntityPlayerSP
 {
+	public static boolean antihunger = false;
+	public static boolean customonground;
 	public static boolean derp = false;
 	public static float bedblockx, bedblockz;
 	public static long bedtimer, bedtimermain;
@@ -89,7 +92,9 @@ public class EntityClientPlayerMP extends EntityPlayerSP
      */
     public void sendMotionUpdates()
     {
-    	
+    	if(!antihunger) {
+    		customonground = this.onGround;
+    	}
     	
     	
     	if(!jesusoverride) {
@@ -207,7 +212,9 @@ public class EntityClientPlayerMP extends EntityPlayerSP
     					if(Silent.bool == "True") {
     					mc.thePlayer.setRotation(yaw, pitch);
     					}else {
-    						mc.thePlayer.sendQueue.addToSendQueue(new Packet13PlayerLookMove(mc.thePlayer.posX, mc.thePlayer.boundingBox.minY, mc.thePlayer.posY, mc.thePlayer.posZ, yaw, pitch, mc.thePlayer.onGround));
+    						rotationoverride = true;
+    						customyaw = yaw;
+    						custompitch = pitch;
     						
     						
     						
@@ -225,6 +232,10 @@ public class EntityClientPlayerMP extends EntityPlayerSP
     					
     					
     				
+    				}
+    			}else {
+    				if(!mc.thePlayer.isSwingInProgress) {
+    				rotationoverride = false;
     				}
     			}
     		}
@@ -258,6 +269,10 @@ public class EntityClientPlayerMP extends EntityPlayerSP
     	    				//mc.thePlayer.rotationYaw = yaw;
     	    				//mc.thePlayer.rotationPitch = pitch;
     	    				//mc.thePlayer.sendQueue.addToSendQueue(new Packet12PlayerLook(yaw, pitch, true));
+    	    				RenderGlobal.flatten = true;
+    	    				RenderGlobal.searchx = k1;
+    	    				RenderGlobal.searchy = l1;
+    	    				RenderGlobal.searchz = i2;
     	    				mc.thePlayer.sendQueue.addToSendQueue(new Packet13PlayerLookMove(mc.thePlayer.posX, mc.thePlayer.boundingBox.minY, mc.thePlayer.posY, mc.thePlayer.posZ, yaw, pitch, true));
     						mc.thePlayer.sendQueue.addToSendQueue(new Packet14BlockDig(0 , k1, l1, i2, 1));
     						mc.thePlayer.sendQueue.addToSendQueue(new Packet14BlockDig(2, k1, l1, i2, 1));
@@ -283,11 +298,15 @@ public class EntityClientPlayerMP extends EntityPlayerSP
         {
             if (var1)
             {
+            	if(!antihunger) {
                 this.sendQueue.addToSendQueue(new Packet19EntityAction(this, 4));
+            	}
             }
             else
             {
+            	if(!antihunger) {
                 this.sendQueue.addToSendQueue(new Packet19EntityAction(this, 5));
+            	}
             }
 
             this.wasSneaking = var1;
@@ -320,16 +339,16 @@ public class EntityClientPlayerMP extends EntityPlayerSP
         if(freecamenabled == false) {
         if (this.ridingEntity != null)
         {
-            this.sendQueue.addToSendQueue(new Packet13PlayerLookMove(this.motionX, -999.0D, -999.0D, this.motionZ, customyaw, custompitch, this.onGround));
+            this.sendQueue.addToSendQueue(new Packet13PlayerLookMove(this.motionX, -999.0D, -999.0D, this.motionZ, customyaw, custompitch, customonground));
             var13 = false;
         }
         else if (var13 && var14)
         {
-            this.sendQueue.addToSendQueue(new Packet13PlayerLookMove(this.posX, this.boundingBox.minY, this.posY, this.posZ, customyaw, custompitch, this.onGround));
+            this.sendQueue.addToSendQueue(new Packet13PlayerLookMove(this.posX, this.boundingBox.minY, this.posY, this.posZ, customyaw, custompitch, customonground));
         }
         else if (var13)
         {
-            this.sendQueue.addToSendQueue(new Packet11PlayerPosition(this.posX, this.boundingBox.minY, this.posY, this.posZ, this.onGround));
+            this.sendQueue.addToSendQueue(new Packet11PlayerPosition(this.posX, this.boundingBox.minY,this.posY, this.posZ, customonground));
         }
         else if (var14)
         {
@@ -339,11 +358,11 @@ public class EntityClientPlayerMP extends EntityPlayerSP
         }
         else
         {
-            this.sendQueue.addToSendQueue(new Packet10Flying(this.onGround));
+            this.sendQueue.addToSendQueue(new Packet10Flying(customonground));
         }
 
         ++this.field_71168_co;
-        this.wasOnGround = this.onGround;
+        this.wasOnGround = customonground;
 
         if (var13)
         {

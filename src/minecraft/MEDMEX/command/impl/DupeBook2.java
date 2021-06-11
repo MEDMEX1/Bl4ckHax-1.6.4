@@ -59,7 +59,7 @@ public class DupeBook2 extends Command {
 	String p47 = "䗹刎ߢ㼣⧿낚㿤≜ᱪ鱷ꊭ⣰炦ઐᓎ롢퉇篯㜠㓦줈놡☰〽Თ淥洺扯边籕⨈㰨靿指掹㓛錣졇쫹᧦⋊扨첰ﺃ섯ꖵ탆ﻌ᤾㼬頑歘㻻쩵ꞶႴ휢컛Ⲉ瓏랆➛㴸詅ࡌ庳֜﫧쫆ቤ鄷⢓弡璈帓ൡ熣톬?鱫폹㽟镦荇툷竸攢뜰魖촩⾜ⴾ㚺୚ᡞ디ꨭ敧㙩윅▪⹕⎊의ꯖ隴鰥捫겫吵혇઻㊤䭩蹈㩻མ탔箔?ꬌ턊릂덤濐눊钲⠐干뚡暣坳◄볏䅲蠝㱻鸈秫꾈筼㉞봊谅냅ໄറ㪊갓쾱繄斤৏⣠뼰靷뽀᪼ꆻ뵱泓ᵧ뫱蘽?ᗙ㸛ⅰ뛑⃷쬦沊뚛尰훖ᡟ櫤倄충཭頥䫐䭍纺ｴ衜谐蕒踪惮辙뾵 ";
 	String p48 = "倅뷎묅굇⡍曪垐砽뭫䬪꼧湯뜙혎̣ᑹ䄟?鉮ꒂ韶?檪ሼ↣㕕?㫨뗻⹀帲옽踸䒁?㴿팚욨栻趃츑ᎏ憛璴絙丸렍?阙㑬ᬉ꯰ႚ埧₃歌䖤切㭝䙅䊶艄隺?澖懫孝㘚꫃⎘醪䉥瑫᤿⇳७㹡ᐢ鈠폄䍔偽쀯膤雀슠㒂㾚畝蒻䑅璨뢵踱烨ῂ䩥揿斺㐀撖꤄췵昵穐냣馼?굗?쐙㚔뷛欗⣏੫ኼ삐꡼覌릇毂炞랲㤿⁠෧巉꟨袣ド莗Ꮁ睊밫⇥둾⼨刮쭟ἷ蘰孞ᥭ䣅ꢡ৛ᦹ墸਻䯿?栟숲赐⮼⊅ᚕ⮍雓ൃ걫෺?ꓓ쩂웞阳芣ﰲ例횴땨㑚ⷵ墰ᦉ춑亿퉆ꞛ땶峽귭칱እ쟴ꦾ㋌ሻ ";
 	String p49 = "辯?룊ᴥ癒揦硫ȸ쐳快䝚꽜橐㬯湛錱齰䓸液這ￖ摉᫱쩫뢅ˍ鲦䧟촘㔀䑺脂똈᫽玩饀ᮎ阇뙞楚뺲◩垵磞蕤什ㄕ囗鮕녓羖휗ᭁ귲ⶁ佥挑齮赯བྷ썉肘᬴亼洼ⰽﷹ☭⁫࿚靐?瑩犮끳⥭剦哙⭏抟搶俨疶셌㢪䑅鐺蓦ၳỉᩳ奋俨ଞ빋茚⏜Ě⦮篓ꏎ쀚쥡祃橶맺๲廎죋ﻔ➦ᐗ獈跛鲙〘⺆봮᫮욘鬚즣Ⲋ洬禃牚龺ꠐ⊒│괃䱜↉❦樓⋵퐰?쟏⒗䃯뫞⎜꽁虋궎赿큝闚魳㚞쩯辋ᨬ앛೧ቇ갈襂Ⱝéꎪ眧ᴝ玂꺱䱬蕤먘࣓栙鷺敛ꅴ⒕杉ⰲ⸿䛒䩣ힽ눋ҩꕮ遦ꯘ㘷ꒄ✟?ᇦ ";
-	
+	String[] pageContents = {p0, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22, p23, p24, p25, p26, p27, p28, p29, p30, p31, p32, p33, p34, p35, p36, p37, p38, p39, p40, p41, p42, p43, p44, p45, p46, p47, p48, p49};
 	
 	
 	public DupeBook2() {
@@ -72,58 +72,9 @@ public class DupeBook2 extends Command {
 		if(mc.thePlayer.getHeldItem().getUnlocalizedName().equals("item.writingBook")) {
 		if(mc.thePlayer.getHeldItem().hasTagCompound()) {
 		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").removeTag(0);
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(0), p0));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(1), p1));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(2), p2));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(3), p3));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(4), p4));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(5), p5));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(6), p6));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(7), p7));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(8), p8));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(9), p9));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(10), p10));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(11), p11));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(12), p12));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(13), p13));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(14), p14));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(15), p15));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(16), p16));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(17), p17));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(18), p18));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(19), p19));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(20), p20));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(21), p21));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(22), p22));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(23), p23));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(24), p24));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(25), p25));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(26), p26));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(27), p27));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(28), p28));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(29), p29));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(30), p30));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(31), p31));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(32), p32));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(33), p33));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(34), p34));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(35), p35));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(36), p36));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(37), p37));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(38), p38));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(39), p39));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(40), p40));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(41), p41));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(42), p42));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(43), p43));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(44), p44));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(45), p45));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(46), p46));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(47), p47));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(48), p48));
-		mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(49), p49));
-		GuiScreenBook.colortitle = "§6(2)";
-		GuiScreenBook.newauthor = "§1Bl4ckHax";
+		for(int i = 0; i < 50; i++) {
+			mc.thePlayer.getHeldItem().getTagCompound().getTagList("pages").appendTag(new NBTTagString(String.valueOf(i), pageContents[i]));
+		}
 		Client.addChatMessage("Done, now open the book and sign it");
 		}else {
 			Client.addChatMessage("Open the book & quill, change the page and press done first");

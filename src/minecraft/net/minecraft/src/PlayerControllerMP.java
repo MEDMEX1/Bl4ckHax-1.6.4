@@ -31,7 +31,7 @@ public class PlayerControllerMP
     private int blockHitDelay;
 
     /** Tells if the player is hitting a block */
-    private boolean isHittingBlock;
+    public boolean isHittingBlock;
 
     /** Current game type for the player */
     private EnumGameType currentGameType;

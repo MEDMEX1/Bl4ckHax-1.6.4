@@ -3,6 +3,8 @@ package net.minecraft.src;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
+
+import MEDMEX.Client;
 import net.minecraft.server.MinecraftServer;
 
 public abstract class Entity
@@ -605,6 +607,7 @@ public abstract class Entity
 
             if (var20 || safewalkenabled == true && onGround)
             {
+            	
                 double var21;
 
                 for (var21 = 0.05D; par1 != 0.0D && this.worldObj.getCollidingBoundingBoxes(this, this.boundingBox.getOffsetBoundingBox(par1, -1.0D, 0.0D)).isEmpty(); var13 = par1)

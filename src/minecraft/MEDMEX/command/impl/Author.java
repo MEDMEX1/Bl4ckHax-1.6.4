@@ -14,8 +14,8 @@ public class Author extends Command {
 	@Override
 	public void onCommand(String[] args, String command) {
 		try {
-		GuiScreenBook.newauthor = args[0].replace("&", "ยง");
-		Client.addChatMessage("Changed author to: "+GuiScreenBook.newauthor.replace("&", "ยง"));
+		GuiScreenBook.newauthor = args[0].replace("&", "ง");
+		Client.addChatMessage("Changed author to: "+GuiScreenBook.newauthor.replace("&", "ง"));
 		} catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
 			Client.addChatMessage("Usage: Author <name>");
 		}

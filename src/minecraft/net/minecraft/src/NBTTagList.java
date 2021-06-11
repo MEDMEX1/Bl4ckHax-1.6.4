@@ -112,6 +112,7 @@ public class NBTTagList extends NBTBase
     {
         return (NBTBase)this.tagList.get(par1);
     }
+    
 
     /**
      * Returns the number of tags in the list.

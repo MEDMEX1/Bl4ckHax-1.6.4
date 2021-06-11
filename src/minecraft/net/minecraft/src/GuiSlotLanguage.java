@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-class GuiSlotLanguage extends GuiSlot
+public class GuiSlotLanguage extends GuiSlot
 {
     private final List field_77251_g;
     private final Map field_77253_h;

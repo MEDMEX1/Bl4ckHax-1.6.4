@@ -320,12 +320,10 @@ public class FontRenderer implements ResourceManagerReloadListener
      */
     public int drawString(String par1Str, int par2, int par3, int par4, boolean par5)
     {
+
         this.resetStyles();
 
-        if (this.bidiFlag)
-        {
-            par1Str = this.bidiReorder(par1Str);
-        }
+       
 
         int var6;
 

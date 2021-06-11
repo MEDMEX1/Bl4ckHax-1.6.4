@@ -5,6 +5,7 @@ import org.lwjgl.opengl.GL12;
 
 public class ItemRenderer
 {
+	float var11, var12;
 	public static float fov1 = 0.0f;
 	public static float fov2 = 0.3f;
     private static final ResourceLocation RES_ITEM_GLINT = new ResourceLocation("textures/misc/enchanted_item_glint.png");
@@ -62,8 +63,14 @@ public class ItemRenderer
             float var8 = var5.getMaxU();
             float var9 = var5.getMinV();
             float var10 = var5.getMaxV();
-            float var11 = fov1;
-            float var12 = fov2;
+            if(par1EntityLivingBase.getEntityName().equals(Session.username)) {
+            	var11 = fov1;
+                var12 = fov2;
+            }else {
+            	var11 = 0.0f;
+            	var12 = 0.3f;
+            }
+           
             GL11.glEnable(GL12.GL_RESCALE_NORMAL);
             GL11.glTranslatef(-var11, -var12, 0.0F);
             float var13 = 1.5F;

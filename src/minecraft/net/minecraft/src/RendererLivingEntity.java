@@ -8,6 +8,7 @@ import MEDMEX.Client;
 
 public abstract class RendererLivingEntity extends Render
 {
+	public static float var10, var11, var26;
 	public static String auratarget = "";
 	public static boolean nametags = false;
 	public static boolean wallhackenabled = false;
@@ -85,8 +86,18 @@ public abstract class RendererLivingEntity extends Render
 
         try
         {
-            float var10 = this.interpolateRotation(par1EntityLivingBase.prevRenderYawOffset, par1EntityLivingBase.renderYawOffset, par9);
-            float var11 = this.interpolateRotation(par1EntityLivingBase.prevRotationYawHead, par1EntityLivingBase.rotationYawHead, par9);
+        	if(par1EntityLivingBase.getEntityName().contains(Session.username)) {
+        		if(EntityClientPlayerMP.rotationoverride) {
+        			var10 = this.interpolateRotation(EntityClientPlayerMP.customyaw, EntityClientPlayerMP.customyaw, par9);
+        			var11 = this.interpolateRotation(EntityClientPlayerMP.customyaw, EntityClientPlayerMP.customyaw, par9);
+        		}else {
+        			var10 = this.interpolateRotation(par1EntityLivingBase.prevRenderYawOffset, par1EntityLivingBase.renderYawOffset, par9);
+                    var11 = this.interpolateRotation(par1EntityLivingBase.prevRotationYawHead, par1EntityLivingBase.rotationYawHead, par9);
+        		}
+        	}else {
+            var10 = this.interpolateRotation(par1EntityLivingBase.prevRenderYawOffset, par1EntityLivingBase.renderYawOffset, par9);
+            var11 = this.interpolateRotation(par1EntityLivingBase.prevRotationYawHead, par1EntityLivingBase.rotationYawHead, par9);
+        	}
             float var13;
 
             if (par1EntityLivingBase.isRiding() && par1EntityLivingBase.ridingEntity instanceof EntityLivingBase)
@@ -112,8 +123,15 @@ public abstract class RendererLivingEntity extends Render
                     var10 += var13 * 0.2F;
                 }
             }
-
-            float var26 = par1EntityLivingBase.prevRotationPitch + (par1EntityLivingBase.rotationPitch - par1EntityLivingBase.prevRotationPitch) * par9;
+            if(par1EntityLivingBase.getEntityName().contains(Session.username)) {
+            	if(EntityClientPlayerMP.rotationoverride) {
+            		var26 = EntityClientPlayerMP.custompitch;
+            	}else {
+            		var26 = par1EntityLivingBase.prevRotationPitch + (par1EntityLivingBase.rotationPitch - par1EntityLivingBase.prevRotationPitch) * par9;
+            	}
+            }else {
+            	var26 = par1EntityLivingBase.prevRotationPitch + (par1EntityLivingBase.rotationPitch - par1EntityLivingBase.prevRotationPitch) * par9;
+            }
             this.renderLivingAt(par1EntityLivingBase, par2, par4, par6);
             var13 = this.handleRotationFloat(par1EntityLivingBase, par9);
             this.rotateCorpse(par1EntityLivingBase, var13, var10, par9);

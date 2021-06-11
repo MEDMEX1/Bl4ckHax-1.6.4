@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 import org.lwjgl.opengl.Display;
 
+import MEDMEX.UI.ClickGui;
 import MEDMEX.UI.HUD;
 import MEDMEX.command.CommandManager;
 import MEDMEX.config.Friend;
@@ -21,19 +22,19 @@ import MEDMEX.modules.Module;
 import MEDMEX.modules.Module.Category;
 import MEDMEX.modules.Movement.*;
 import MEDMEX.modules.Render.*;
+import MEDMEX.modules.World.*;
 import net.minecraft.src.Minecraft;
-import noom.clickgui.ClickGui;
-import noom.clickgui.module.ClickGUI;
 import noom.config.Config;
 import MEDMEX.modules.Player.*;
 import MEDMEX.modules.Combat.*;
+import MEDMEX.modules.Misc.*;
+
 
 
 public class Client {
 	
 	public static String friendslist = "";
-	public static ClickGui clickgui = new ClickGui();
-	public static String name = "Bl4ckHax", version = "X";
+	public static String name = "Bl4ckHax", version = "XI";
 	public static CopyOnWriteArrayList<Module> modules = new CopyOnWriteArrayList<Module>();
 	public static HUD hud = new HUD();
 	public static CommandManager commandManager = new CommandManager();
@@ -91,7 +92,6 @@ public class Client {
 		modules.add(new Waypoint());
 		modules.add(new Scaffold());
 		modules.add(new AutoEat());
-		modules.add(new ClickGUI());
 		modules.add(new XCarry());
 		modules.add(new VisualRange());
 		modules.add(new NoFallMLG());
@@ -114,6 +114,12 @@ public class Client {
 		modules.add(new Search());
 		modules.add(new Derp());
 		modules.add(new LogoutSpots());
+		modules.add(new AntiHunger());
+		modules.add(new Step());
+		modules.add(new Jesus2());
+		modules.add(new Strafe());
+		modules.add(new ClickGui());
+		modules.add(new RoofTravel());
 		
 		Config.load();
 		
@@ -132,7 +138,7 @@ public class Client {
 	}
 
 		
-
+	
 	
 			
 	
@@ -160,9 +166,9 @@ public class Client {
 		
 	}
 	
-	public List<Module> getModuleByCategory(Category c){
+	public static List<Module> getModuleByCategory(Category c){
 		List<Module> modules = new ArrayList<Module>();
-		for(Module m : this.modules) {
+		for(Module m : Client.modules) {
 			if(m.category == c)
 				modules.add(m);
 		}

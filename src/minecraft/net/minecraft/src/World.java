@@ -10,10 +10,12 @@ import java.util.Random;
 import java.util.Set;
 
 import MEDMEX.Client;
+import MEDMEX.Util.RenderUtils;
 import net.minecraft.server.MinecraftServer;
 
 public abstract class World implements IBlockAccess
 {
+	int i = 0;
 	public static String targetname;
 	public static boolean info = false;
 	public static boolean donkeyfinder = false;
@@ -1452,7 +1454,7 @@ public abstract class World implements IBlockAccess
                 this.updateAllPlayersSleepingFlag();
                 if(visualrange) {
                 	if(mc.thePlayer != null) {
-                	if(var5.username != Minecraft.thePlayer.username) {
+                	if(var5.username != Minecraft.thePlayer.username && !(var5.username.contains(" "))) {
                 Client.addChatMessage(var5.username+" has entered visual range");
                 	}
                 
@@ -1510,7 +1512,7 @@ public abstract class World implements IBlockAccess
         	
         	EntityPlayer var5 = (EntityPlayer)par1Entity;
         	if(visualrange) {
-        		if(var5.username != Minecraft.thePlayer.username) {
+        		if(var5.username != Minecraft.thePlayer.username && !(var5.username.contains(" "))) {
         	Client.addChatMessage(var5.username+" has left visual range");
         		
         	}
@@ -1524,6 +1526,12 @@ public abstract class World implements IBlockAccess
         		}
         		if(!(playersinserver.contains(var5.username))) {
         			Client.addChatMessage(var5.username+" Logged out at: "+var5.posX+", "+var5.posY+", "+var5.posZ);
+        			EntityPlayer entity = new EntityOtherPlayerMP(Minecraft.theWorld, var5.username+" Logout Location");
+        			entity.copyDataFrom(var5, true);
+        			entity.posY -= var5.yOffset;
+        			i++;
+        			Minecraft.theWorld.addEntityToWorld(i, entity);
+        			
         		}
         		
         	}
