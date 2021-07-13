@@ -176,7 +176,7 @@ public class RenderBiped extends RenderLiving
                 {
                     var6 = 0.625F;
                     GL11.glTranslatef(0.0F, -0.25F, 0.0F);
-                    GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
+                    GL11.glRotatef(0.0F, 0.0F, 1.0F, 0.0F);
                     GL11.glScalef(var6, -var6, -var6);
                 }
 

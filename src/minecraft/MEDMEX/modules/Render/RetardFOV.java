@@ -19,11 +19,13 @@ public class RetardFOV extends Module {
 	public void onEnable() {
 		ItemRenderer.fov1 = -2.0f;
 		ItemRenderer.fov2 = 0.4f;
+		ItemRenderer.retardfov = true;
 	}
 	
 	public void onDisable() {
 		ItemRenderer.fov1 = 0.0f;
 		ItemRenderer.fov2 = 0.3f;
+		ItemRenderer.retardfov = false;
 	}
 	
 

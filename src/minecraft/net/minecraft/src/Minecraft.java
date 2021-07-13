@@ -39,6 +39,7 @@ import org.lwjgl.util.glu.GLU;
 
 public class Minecraft implements IPlayerUsage
 {
+	public static boolean packetmine = false;
 	public static RenderManager RenderManager;
     public static RenderManager getRenderManager() {
 		return RenderManager;
@@ -1204,7 +1205,10 @@ public class Minecraft implements IPlayerUsage
                 int var4 = this.objectMouseOver.blockY;
                 int var5 = this.objectMouseOver.blockZ;
                 this.playerController.onPlayerDamageBlock(var3, var4, var5, this.objectMouseOver.sideHit);
-
+                if(packetmine) {
+                Minecraft.getMinecraft().thePlayer.sendQueue.addToSendQueue(new Packet14BlockDig(0, var3, var4, var5, this.objectMouseOver.sideHit));
+                Minecraft.getMinecraft().thePlayer.sendQueue.addToSendQueue(new Packet14BlockDig(2, var3, var4, var5, this.objectMouseOver.sideHit));
+                }
                 if (this.thePlayer.isCurrentToolAdventureModeExempt(var3, var4, var5))
                 {
                     this.effectRenderer.addBlockHitEffects(var3, var4, var5, this.objectMouseOver.sideHit);

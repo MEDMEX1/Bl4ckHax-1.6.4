@@ -54,6 +54,11 @@ public class CommandManager {
 		commands.add(new Friend());
 		commands.add(new Info());
 		commands.add(new Hclip());
+		commands.add(new Setblock());
+		commands.add(new NewChunks());
+		commands.add(new Search());
+		commands.add(new Dupe());
+		commands.add(new SpeedMine());
 		
 	}
 	

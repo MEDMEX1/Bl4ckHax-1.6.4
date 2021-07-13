@@ -10,6 +10,8 @@ public class Block {
 	/**
 	 * used as foreach item, if item.tab = current tab, display it on the screen
 	 */
+	
+	public static boolean search = false;
 	public static boolean phase = false;
 	public static boolean xray = false;
 	private CreativeTabs displayOnCreativeTab;
@@ -647,7 +649,7 @@ public class Block {
 	 */
 	public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
 		
-		
+	
 		
 		
 		if(xray == true) {
@@ -678,6 +680,13 @@ public class Block {
 	 * iBlockAccess, x, y, z, side
 	 */
 	public Icon getBlockTexture(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
+		if(search) {
+		if(RenderGlobal.blocks.contains(blockID)) {
+			RenderGlobal.searchx.add(par2);
+			RenderGlobal.searchy.add(par3);
+			RenderGlobal.searchz.add(par4);
+		}
+		}
 		return this.getIcon(par5, par1IBlockAccess.getBlockMetadata(par2, par3, par4));
 	}
 

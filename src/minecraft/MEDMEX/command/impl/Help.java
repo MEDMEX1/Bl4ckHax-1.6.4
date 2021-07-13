@@ -38,7 +38,7 @@ public class Help extends Command {
 		Client.addChatMessage(".username <name> - Changes username");
 		Client.addChatMessage(".Friend <username> - Adds friend");
 		Client.addChatMessage(".info <username> - gives information about a player (only if they're in render distance)");
-	
+		Client.addChatMessage(".SpeedMine <Normal/Packet> - Changes SpeedMine Mode");
 	}
 	}
 		

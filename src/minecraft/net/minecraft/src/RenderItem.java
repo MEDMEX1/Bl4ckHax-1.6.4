@@ -6,6 +6,7 @@ import org.lwjgl.opengl.GL12;
 
 public class RenderItem extends Render
 {
+	public static boolean TrueSize = false;
     private static final ResourceLocation RES_ITEM_GLINT = new ResourceLocation("textures/misc/enchanted_item_glint.png");
     private RenderBlocks itemRenderBlocks = new RenderBlocks();
 
@@ -493,7 +494,23 @@ public class RenderItem extends Render
     {
         if (par3ItemStack != null)
         {
+        	
+        	if(TrueSize) {
+
+                if (par3ItemStack.stackSize > 1 || par3ItemStack.stackSize < 1|| par6Str != null)
+                	
+                {
+                    String var7 = par6Str == null ? String.valueOf(par3ItemStack.stackSize) : par6Str;
+                    GL11.glDisable(GL11.GL_LIGHTING);
+                    GL11.glDisable(GL11.GL_DEPTH_TEST);
+                    par1FontRenderer.drawStringWithShadow(var7, par4 + 19 - 2 - par1FontRenderer.getStringWidth(var7), par5 + 6 + 3, 16777215);
+                    GL11.glEnable(GL11.GL_LIGHTING);
+                    GL11.glEnable(GL11.GL_DEPTH_TEST);
+                }
+        	}else {
+        	
             if (par3ItemStack.stackSize > 1 || par6Str != null)
+            	
             {
                 String var7 = par6Str == null ? String.valueOf(par3ItemStack.stackSize) : par6Str;
                 GL11.glDisable(GL11.GL_LIGHTING);
@@ -502,6 +519,8 @@ public class RenderItem extends Render
                 GL11.glEnable(GL11.GL_LIGHTING);
                 GL11.glEnable(GL11.GL_DEPTH_TEST);
             }
+        	}
+        	
 
             if (par3ItemStack.isItemDamaged())
             {

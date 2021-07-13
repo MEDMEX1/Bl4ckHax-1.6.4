@@ -106,7 +106,7 @@ public class RenderUtils {
 		GL11.glPushMatrix();
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(770, 771);
-		// GL11.glDisable(GL11.GL_LIGHTING);
+		 GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glEnable(GL11.GL_LINE_SMOOTH);
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
@@ -116,7 +116,7 @@ public class RenderUtils {
 		drawOutlinedBoundingBox(new AxisAlignedBB(x, y, z, x + 1D, y + 1D, z + 1D));
 		GL11.glDisable(GL11.GL_LINE_SMOOTH);
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
-		// GL11.glEnable(GL11.GL_LIGHTING);
+		 GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
 		GL11.glDepthMask(true);
 		GL11.glDisable(GL11.GL_BLEND);

@@ -14,6 +14,7 @@ public class ChunkCache implements IBlockAccess
 
     public ChunkCache(World par1World, int par2, int par3, int par4, int par5, int par6, int par7, int par8)
     {
+    	
         this.worldObj = par1World;
         this.chunkX = par2 - par8 >> 4;
         this.chunkZ = par4 - par8 >> 4;
@@ -33,6 +34,7 @@ public class ChunkCache implements IBlockAccess
 
                 if (var13 != null)
                 {
+                	
                     this.chunkArray[var11 - this.chunkX][var12 - this.chunkZ] = var13;
                 }
             }
@@ -46,6 +48,7 @@ public class ChunkCache implements IBlockAccess
 
                 if (var13 != null && !var13.getAreLevelsEmpty(par3, par6))
                 {
+                	
                     this.isEmpty = false;
                 }
             }
@@ -57,6 +60,7 @@ public class ChunkCache implements IBlockAccess
      */
     public boolean extendedLevelsInChunkCache()
     {
+    	
         return this.isEmpty;
     }
 

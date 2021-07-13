@@ -17,10 +17,20 @@ import MEDMEX.Util.RenderUtils;
 
 public class RenderGlobal implements IWorldAccess
 {
+	public static List<Integer> blocks = new ArrayList<>();
+	public static boolean search = true;
+	public static int ncheight = 0;
+	public static List<Integer> x= new ArrayList<>();
+	public static List<Integer> z= new ArrayList<>();
+	public static List<Integer> searchx= new ArrayList<>();
+	public static List<Integer> searchy= new ArrayList<>();
+	public static List<Integer> searchz= new ArrayList<>();
+	public static double flattenx, flatteny, flattenz;
+	public static boolean newchunks = false;
+	public static int newchunkx, newchunkz;
 	public static int scaffoldx, scaffoldy, scaffoldz;
 	public static boolean scaffold = false;
 	public static boolean flatten = false;
-	public static int searchx, searchy, searchz;
 	public static boolean waypointoutline = false;
 	public static int blockx, blocky, blockz;
 	public static boolean soundlocator = false;
@@ -604,6 +614,8 @@ public class RenderGlobal implements IWorldAccess
 		GL11.glEnable(2929 /* GL_DEPTH_TEST */);
  
 	}
+   
+    
     
     
     
@@ -625,6 +637,16 @@ public class RenderGlobal implements IWorldAccess
     	if(scaffold == true) {
     		drawScaffold(true);
     	}
+    	
+    	if(newchunks == true) {
+    		drawNewChunks(true);
+    	}
+    	if(search == true) {
+    		drawSearch(true);
+    	}
+    	
+    	
+    	
     	
     	
     	
@@ -1871,6 +1893,36 @@ public class RenderGlobal implements IWorldAccess
         }
     }
     
+    public static void drawSearch(boolean flag) {
+    	for(int i = 0; i < searchx.size(); i++) {
+    	double renderX = searchx.get(i) - Minecraft.RenderManager.renderPosX;
+    	Double RenderY = searchy.get(i) - Minecraft.RenderManager.renderPosY;
+    	double renderZ = searchz.get(i) - Minecraft.RenderManager.renderPosZ;
+    	if(blocks.contains(Minecraft.getMinecraft().theWorld.getBlockId(searchx.get(i), searchy.get(i), searchz.get(i)))) {
+    		RenderUtils.drawOutlinedBlockESP(renderX, RenderY, renderZ, 1f, 1f, 1f, 1f, 1);
+    	}
+    	}
+    }
+    
+   
+    
+    public static void drawNewChunks(boolean flag) {
+    	if(x.size() >= 700) {
+    		x.remove(0);
+    	}
+    	if(z.size() >= 700) {
+    		z.remove(0);
+    	}
+    	
+    	for(int i = 0; i < x.size(); i++) {
+    	double renderX = x.get(i) - Minecraft.RenderManager.renderPosX;
+    	Double RenderY = ncheight - Minecraft.RenderManager.renderPosY;
+    	double renderZ = z.get(i) - Minecraft.RenderManager.renderPosZ;
+    	RenderUtils.drawOutlinedEntityESP(renderX, RenderY, renderZ, 8, 0, 255, 0, 0, 255);
+    	}
+    }
+    
+    
     public static void drawScaffold(boolean flag) {
     	double renderX = scaffoldx - Minecraft.RenderManager.renderPosX;
     	double renderY = scaffoldy - Minecraft.RenderManager.renderPosY;
@@ -1880,9 +1932,9 @@ public class RenderGlobal implements IWorldAccess
     
     
     public static void drawFlatten(boolean flag) {
-    	double renderX = searchx - Minecraft.RenderManager.renderPosX;
-    	double renderY = searchy - Minecraft.RenderManager.renderPosY;
-    	double renderZ = searchz - Minecraft.RenderManager.renderPosZ;
+    	double renderX = flattenx - Minecraft.RenderManager.renderPosX;
+    	double renderY = flatteny - Minecraft.RenderManager.renderPosY;
+    	double renderZ = flattenz - Minecraft.RenderManager.renderPosZ;
     	RenderUtils.drawSolidBlockESP(renderX, renderY, renderZ, 230, 1, 1, 255);
     }
   

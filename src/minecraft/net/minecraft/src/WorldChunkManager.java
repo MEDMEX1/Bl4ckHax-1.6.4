@@ -172,7 +172,9 @@ public class WorldChunkManager
         if (par6 && par4 == 16 && par5 == 16 && (par2 & 15) == 0 && (par3 & 15) == 0)
         {
             BiomeGenBase[] var9 = this.biomeCache.getCachedBiomes(par2, par3);
+           
             System.arraycopy(var9, 0, par1ArrayOfBiomeGenBase, 0, par4 * par5);
+            
             return par1ArrayOfBiomeGenBase;
         }
         else

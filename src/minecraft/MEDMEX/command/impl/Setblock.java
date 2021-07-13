@@ -7,16 +7,15 @@ import net.minecraft.src.GuiScreenBook;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Minecraft;
 
-public class Stack extends Command {
+public class Setblock extends Command {
 	
-	public Stack() {
-		super("Stack", "Stacks item in hand", "Stack", "stack");
+	public Setblock() {
+		super("Setblock", "Sets block", "setblock <itemid>", "setblock");
 	}
 
 	@Override
 	public void onCommand(String[] args, String command) {
-		mc.thePlayer.getHeldItem().stackSize = 64;
-		
+		mc.theWorld.setBlock((int)mc.thePlayer.posX, (int)mc.thePlayer.posY, (int)mc.thePlayer.posZ, Integer.valueOf(args[0]));
 			
 		
 	}

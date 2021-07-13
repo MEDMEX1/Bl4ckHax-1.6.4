@@ -14,6 +14,7 @@ public class ChunkCoordinates implements Comparable
 
     public ChunkCoordinates(int par1, int par2, int par3)
     {
+    	
         this.posX = par1;
         this.posY = par2;
         this.posZ = par3;

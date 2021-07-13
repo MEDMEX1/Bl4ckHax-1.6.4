@@ -32,6 +32,7 @@ public class Aura extends Module {
 	
 	public void onDisable() {
 		EntityClientPlayerMP.aura = false;
+		EntityClientPlayerMP.rotationoverride = false;
 		
 	}
 }

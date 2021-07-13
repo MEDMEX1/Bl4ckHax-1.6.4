@@ -4,6 +4,7 @@ public class ChunkLoader
 {
     public static AnvilConverterData load(NBTTagCompound par0NBTTagCompound)
     {
+    	
         int var1 = par0NBTTagCompound.getInteger("xPos");
         int var2 = par0NBTTagCompound.getInteger("zPos");
         AnvilConverterData var3 = new AnvilConverterData(var1, var2);
@@ -31,6 +32,7 @@ public class ChunkLoader
 
     public static void convertToAnvilFormat(AnvilConverterData par0AnvilConverterData, NBTTagCompound par1NBTTagCompound, WorldChunkManager par2WorldChunkManager)
     {
+    	
         par1NBTTagCompound.setInteger("xPos", par0AnvilConverterData.x);
         par1NBTTagCompound.setInteger("zPos", par0AnvilConverterData.z);
         par1NBTTagCompound.setLong("LastUpdate", par0AnvilConverterData.lastUpdated);

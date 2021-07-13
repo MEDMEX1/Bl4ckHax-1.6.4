@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Scanner;
 
 import org.lwjgl.input.Keyboard;
 
@@ -23,6 +24,7 @@ import net.minecraft.src.ScaledResolution;
 import net.minecraft.src.Session;
 
 public class HUD {
+	public static boolean potionHUD = false;
 	public static boolean clickgui;
 	long timer = 0;
 	public static boolean infoenabled = false;
@@ -86,14 +88,41 @@ public class HUD {
 				coords = "["+xCoord+", "+yCoord+", "+zCoord+"]";
 			}
 			
-			mc.fontRenderer.drawStringWithShadow(coords, 4, 14, ColorUtil.getRainbow(4, 1.0f, 1, -100));
-			mc.fontRenderer.drawStringWithShadow("Current Item: "+var, 4, 24, ColorUtil.getRainbow(4, 1.0f, 1, -200));
-			mc.fontRenderer.drawStringWithShadow("Name: "+ Session.username, 4, 34, ColorUtil.getRainbow(4, 1.0f, 1, -300));
-			mc.fontRenderer.drawStringWithShadow("Speed: "+speed3, 4, 44, ColorUtil.getRainbow(4, 1.0f, 1, -400));
+			mc.fontRenderer.drawStringWithShadow(coords, 4, 14, ColorUtil.getRainbow(4, 0.6f, 1, -100));
+			mc.fontRenderer.drawStringWithShadow("Current Item: "+var, 4, 24, ColorUtil.getRainbow(4, 0.6f, 1, -200));
+			mc.fontRenderer.drawStringWithShadow("Name: "+ Session.username, 4, 34, ColorUtil.getRainbow(4, 0.6f, 1, -300));
+			mc.fontRenderer.drawStringWithShadow("Speed: "+speed3, 4, 44, ColorUtil.getRainbow(4, 0.6f, 1, -400));
 		
 			}
 			}
 		}
+		
+		if(potionHUD) {
+			ScaledResolution sr = new ScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);
+			FontRenderer fr = mc.fontRenderer;
+			if(mc.thePlayer.getActivePotionEffects() != null) {
+				 int effects = mc.thePlayer.getActivePotionEffects().size();
+				 int count = 0;
+				 for(int i = 0; i < effects; i++) {
+					 String effect = mc.thePlayer.getActivePotionEffects().toArray()[i].toString();
+					 String effectType = effect.split(",")[0];
+					 String effectType2 = effectType.replace("potion.", "");
+					 String effectTime = effect.split(",")[1];
+					 String effectTime2 = effectTime.replace(" Duration: ", "");
+					 int eTime = Integer.valueOf(effectTime2);
+					 int truetime = eTime /20;
+					 int seconds = truetime; 
+				     int p1 = seconds % 60;
+				     int p2 = seconds / 60;
+				     int p3 = p2 % 60;
+				     p2 = p2 / 60;
+				     mc.fontRenderer.drawStringWithShadow(effectType2+", "+p3 + ":" + p1, sr.getScaledWidth() - fr.getStringWidth(effectType2+", "+p3 + ":" + p1) - 4, sr.getScaledHeight() - 12 + count * (fr.FONT_HEIGHT), ColorUtil.getRainbow(4, 0.6f, 1f, count * -100));			
+				     count--;
+				 }
+			}
+		}
+		
+		
 
 		
 		
@@ -104,7 +133,7 @@ public class HUD {
 		Collections.sort(Client.modules, new ModuleComparator());
 		if(!clickgui) {
 		if(GameSettings.showDebugInfo == false) {
-		mc.fontRenderer.drawStringWithShadow(Client.name + " "+ Client.version, 4, 4, ColorUtil.getRainbow(4, 1.0f, 1, 1));
+		mc.fontRenderer.drawStringWithShadow(Client.name + " "+ Client.version, 4, 4, ColorUtil.getRainbow(4, 0.6f, 1, 1));
 		}
 		
 		int count = 0;
@@ -115,7 +144,7 @@ public class HUD {
 				continue;	
 			if(!clickgui) {
 			if(GameSettings.showDebugInfo == false) {
-			mc.fontRenderer.drawStringWithShadow(m.name + m.attribute, sr.getScaledWidth() - fr.getStringWidth(m.name + m.attribute) - 4, 4 + count * (fr.FONT_HEIGHT + 2), ColorUtil.getRainbow(4, 1.0f, 1, count * -100));
+			mc.fontRenderer.drawStringWithShadow(m.name + m.attribute, sr.getScaledWidth() - fr.getStringWidth(m.name + m.attribute) - 4, 4 + count * (fr.FONT_HEIGHT + 2), ColorUtil.getRainbow(4, 0.6f, 1, count * -100));
 			}
 			}
 			count++;

@@ -400,7 +400,7 @@ public class RenderPlayer extends RendererLivingEntity
         GL11.glColor3f(var2, var2, var2);
         this.modelBipedMain.onGround = 0.0F;
         this.modelBipedMain.setRotationAngles(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F, par1EntityPlayer);
-        this.modelBipedMain.bipedRightArm.render(0.0625F);
+        this.modelBipedMain.bipedRightArm.render(.0625F);
     }
 
     /**

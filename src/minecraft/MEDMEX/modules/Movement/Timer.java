@@ -29,7 +29,7 @@ public class Timer extends Module {
 		if(e instanceof EventUpdate) {
 			if(e.isPre()) {
 				net.minecraft.src.Timer.CustomTimer = customtimercmd;
-				this.attribute = " ["+customtimercmd+"]";
+				this.attribute = " §7[§f"+customtimercmd+"§7]";
 			}
 
 			}

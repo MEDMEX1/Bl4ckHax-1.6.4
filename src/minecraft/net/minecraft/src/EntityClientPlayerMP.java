@@ -1,5 +1,7 @@
 package net.minecraft.src;
 
+import org.lwjgl.input.Keyboard;
+
 import MEDMEX.Client;
 import MEDMEX.Util.RenderUtils;
 import MEDMEX.config.Silent;
@@ -8,6 +10,7 @@ import MEDMEX.events.listeners.EventMotion;
 
 public class EntityClientPlayerMP extends EntityPlayerSP
 {
+	public static boolean cartaura = false;
 	public static boolean antihunger = false;
 	public static boolean customonground;
 	public static boolean derp = false;
@@ -105,6 +108,30 @@ public class EntityClientPlayerMP extends EntityPlayerSP
         	customyaw = this.rotationYaw;
         	custompitch = this.rotationPitch;
         }
+    	
+    	if(cartaura) {
+    		for(int i = 0; i < mc.theWorld.loadedEntityList.size(); i++) {
+    			if((Entity)mc.theWorld.loadedEntityList.get(i) != this &&  getDistanceSqToEntity((Entity)mc.theWorld.loadedEntityList.get(i))<16D) {
+    				if(((Entity)mc.theWorld.loadedEntityList.get(i) instanceof EntityMinecartChest)){
+    					if(mc.thePlayer.canEntityBeSeen((Entity)mc.theWorld.loadedEntityList.get(i))){
+        				float x = getPosX((Entity)mc.theWorld.loadedEntityList.get(i));
+        				float z = getPosZ((Entity)mc.theWorld.loadedEntityList.get(i));
+        				float y = getPosY((Entity)mc.theWorld.loadedEntityList.get(i));
+        				float yaw = (float) -(Math.atan2((x-mc.thePlayer.posX),(z-mc.thePlayer.posZ))*(180.0/Math.PI));
+        				float pitch = (float) -(Math.asin((y - mc.thePlayer.posY) / getDistanceToEntity((Entity)mc.theWorld.loadedEntityList.get(i)))*(180.0/Math.PI));
+						mc.thePlayer.rotationYaw = yaw;
+						mc.thePlayer.rotationPitch = pitch;
+						mc.gameSettings.keyBindUseItem.pressed = true;
+    					}
+    				}else {
+    					mc.gameSettings.keyBindUseItem.pressed = false;
+    				}
+    					
+    				}
+    					
+    				}
+    	}
+    	
     	
     	if(bedaura) {
     		for(int i = 0; i < mc.theWorld.loadedEntityList.size(); i++) {
@@ -270,9 +297,9 @@ public class EntityClientPlayerMP extends EntityPlayerSP
     	    				//mc.thePlayer.rotationPitch = pitch;
     	    				//mc.thePlayer.sendQueue.addToSendQueue(new Packet12PlayerLook(yaw, pitch, true));
     	    				RenderGlobal.flatten = true;
-    	    				RenderGlobal.searchx = k1;
-    	    				RenderGlobal.searchy = l1;
-    	    				RenderGlobal.searchz = i2;
+    	    				RenderGlobal.flattenx = k1;
+    	    				RenderGlobal.flatteny = l1;
+    	    				RenderGlobal.flattenz = i2;
     	    				mc.thePlayer.sendQueue.addToSendQueue(new Packet13PlayerLookMove(mc.thePlayer.posX, mc.thePlayer.boundingBox.minY, mc.thePlayer.posY, mc.thePlayer.posZ, yaw, pitch, true));
     						mc.thePlayer.sendQueue.addToSendQueue(new Packet14BlockDig(0 , k1, l1, i2, 1));
     						mc.thePlayer.sendQueue.addToSendQueue(new Packet14BlockDig(2, k1, l1, i2, 1));

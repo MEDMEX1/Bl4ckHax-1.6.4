@@ -4,6 +4,7 @@ import com.google.common.base.Charsets;
 
 import MEDMEX.Client;
 import MEDMEX.UI.MainMenu;
+import MEDMEX.Util.RenderUtils;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -30,6 +31,7 @@ import org.lwjgl.input.Keyboard;
 
 public class NetClientHandler extends NetHandler
 {
+	public static boolean newchunks = false;
 	public static boolean bedgodmode = false;
     /** True if kicked or disconnected from the server. */
     private boolean disconnected;
@@ -387,9 +389,7 @@ public class NetClientHandler extends NetHandler
 
         if (var2 != null)
         {
-        	if(antikb) {
-        		var2.setVelocity(0, 0, 0);
-        	}else {
+        	if(!antikb) {
             var2.setVelocity((double)par1Packet28EntityVelocity.motionX / 8000.0D, (double)par1Packet28EntityVelocity.motionY / 8000.0D, (double)par1Packet28EntityVelocity.motionZ / 8000.0D);
         	}
         }
@@ -580,6 +580,7 @@ public class NetClientHandler extends NetHandler
      */
     public void handleMapChunk(Packet51MapChunk par1Packet51MapChunk)
     {
+    	
         if (par1Packet51MapChunk.includeInitialize)
         {
             if (par1Packet51MapChunk.yChMin == 0)
@@ -594,14 +595,29 @@ public class NetClientHandler extends NetHandler
         this.worldClient.invalidateBlockReceiveRegion(par1Packet51MapChunk.xCh << 4, 0, par1Packet51MapChunk.zCh << 4, (par1Packet51MapChunk.xCh << 4) + 15, 256, (par1Packet51MapChunk.zCh << 4) + 15);
         Chunk var2 = this.worldClient.getChunkFromChunkCoords(par1Packet51MapChunk.xCh, par1Packet51MapChunk.zCh);
 
+        
+        
         if (par1Packet51MapChunk.includeInitialize && var2 == null)
         {
             this.worldClient.doPreChunk(par1Packet51MapChunk.xCh, par1Packet51MapChunk.zCh, true);
             var2 = this.worldClient.getChunkFromChunkCoords(par1Packet51MapChunk.xCh, par1Packet51MapChunk.zCh);
+            
         }
 
         if (var2 != null)
-        {
+        {	
+        	if(newchunks) {
+        	int newchunkx = var2.xPosition*16;
+        	int newchunkz = var2.zPosition*16;
+        	double renderX = newchunkx - Minecraft.RenderManager.renderPosX;
+        	Double RenderY = 0 - Minecraft.RenderManager.renderPosY;
+        	double renderZ = newchunkz - Minecraft.RenderManager.renderPosZ;
+        	RenderGlobal.x.add(newchunkx);
+        	RenderGlobal.z.add(newchunkz);
+        	}
+        	
+        	
+        	
             var2.fillChunk(par1Packet51MapChunk.getCompressedChunkData(), par1Packet51MapChunk.yChMin, par1Packet51MapChunk.yChMax, par1Packet51MapChunk.includeInitialize);
             this.worldClient.markBlockRangeForRenderUpdate(par1Packet51MapChunk.xCh << 4, 0, par1Packet51MapChunk.zCh << 4, (par1Packet51MapChunk.xCh << 4) + 15, 256, (par1Packet51MapChunk.zCh << 4) + 15);
 

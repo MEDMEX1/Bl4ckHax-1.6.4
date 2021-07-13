@@ -1249,6 +1249,10 @@ public abstract class Entity
     	float var1 = (float) par1Entity.posY;
     	return var1;
     }
+    public float getminY(Entity par1Entity) {
+    	float var1 = (float)par1Entity.boundingBox.maxY;
+		return var1;
+    }
 
     /**
      * Sets the entity's position and rotation. Args: posX, posY, posZ, yaw, pitch

@@ -94,6 +94,7 @@ public class ActiveRenderInfo
      */
     public static int getBlockIdAtEntityViewpoint(World par0World, EntityLivingBase par1EntityLivingBase, float par2)
     {
+    	
         Vec3 var3 = projectViewFromEntity(par1EntityLivingBase, (double)par2);
         ChunkPosition var4 = new ChunkPosition(var3);
         int var5 = par0World.getBlockId(var4.x, var4.y, var4.z);

@@ -98,6 +98,7 @@ public class ChunkProviderFlat implements IChunkProvider
      */
     public Chunk provideChunk(int par1, int par2)
     {
+    	
         Chunk var3 = new Chunk(this.worldObj, par1, par2);
 
         for (int var4 = 0; var4 < this.cachedBlockIDs.length; ++var4)

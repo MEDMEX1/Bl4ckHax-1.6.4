@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import org.lwjgl.opengl.GL11;
 
+import MEDMEX.Client;
+
 public class WorldRenderer
 {
     /** Reference to the World object. */
@@ -146,9 +148,12 @@ public class WorldRenderer
             this.tileEntityRenderers.clear();
             byte var8 = 1;
             ChunkCache var9 = new ChunkCache(this.worldObj, var1 - var8, var2 - var8, var3 - var8, var4 + var8, var5 + var8, var6 + var8, var8);
-
+            
+            
+            
             if (!var9.extendedLevelsInChunkCache())
             {
+            	
                 ++chunksUpdated;
                 RenderBlocks var10 = new RenderBlocks(var9);
                 this.bytesDrawn = 0;
@@ -171,6 +176,7 @@ public class WorldRenderer
                                 {
                                     if (!var14)
                                     {
+                                    	
                                         var14 = true;
                                         GL11.glNewList(this.glRenderList + var11, GL11.GL_COMPILE);
                                         GL11.glPushMatrix();
@@ -215,6 +221,7 @@ public class WorldRenderer
 
                     if (var14)
                     {
+                    	
                         this.bytesDrawn += tessellator.draw();
                         GL11.glPopMatrix();
                         GL11.glEndList();

@@ -6,6 +6,7 @@ import net.minecraft.src.Enchantment;
 import net.minecraft.src.GuiScreenBook;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Minecraft;
+import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.NBTTagString;
 
 public class DupeBook1 extends Command {

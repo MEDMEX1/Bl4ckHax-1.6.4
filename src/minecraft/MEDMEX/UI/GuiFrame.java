@@ -39,7 +39,7 @@ public class GuiFrame {
 	
 	public void render(int MouseX, int mouseY) {
 		Gui.drawRect(x, y, x+ width, y+height, new Color(0, 0, 0, 100).getRGB());
-		mc.fontRenderer.drawString(category.toString(), x + 2, y + 2, ColorUtil.getRainbow(4, 1.0f, 1, 0));
+		mc.fontRenderer.drawString(category.toString(), x + 2, y + 2, ColorUtil.getRainbow(4, 0.6f, 1, 0));
 		for(ModuleButton moduleButton : moduleButtons) {
 			moduleButton.draw(MouseX, mouseY);
 		}

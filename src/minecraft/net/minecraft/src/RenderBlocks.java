@@ -8,7 +8,6 @@ import MEDMEX.Util.RenderUtils;
 
 public class RenderBlocks
 {
-	public static boolean search = false;
     /** The IBlockAccess used by this instance of RenderBlocks */
     public IBlockAccess blockAccess;
 

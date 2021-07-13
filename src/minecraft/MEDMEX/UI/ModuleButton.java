@@ -30,7 +30,7 @@ public class ModuleButton {
 	
 	public void draw(int mouseX, int mouseY) {
 		if(module.toggled) {
-		mc.fontRenderer.drawString(module.name, x+2, y+2, ColorUtil.getRainbow(4, 1.0f, 1, 0));
+		mc.fontRenderer.drawString(module.name, x+2, y+2, ColorUtil.getRainbow(4, 0.6f, 1, 0));
 		}else {
 			mc.fontRenderer.drawString(module.name, x+2, y+2, new Color(255, 255, 255).getRGB());
 		}

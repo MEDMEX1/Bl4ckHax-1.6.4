@@ -34,7 +34,7 @@ import MEDMEX.modules.Misc.*;
 public class Client {
 	
 	public static String friendslist = "";
-	public static String name = "Bl4ckHax", version = "XI";
+	public static String name = "Bl4ckHax", version = "XII";
 	public static CopyOnWriteArrayList<Module> modules = new CopyOnWriteArrayList<Module>();
 	public static HUD hud = new HUD();
 	public static CommandManager commandManager = new CommandManager();
@@ -120,6 +120,13 @@ public class Client {
 		modules.add(new Strafe());
 		modules.add(new ClickGui());
 		modules.add(new RoofTravel());
+		modules.add(new TrueSize());
+		modules.add(new GMBypass());
+		modules.add(new PotionHUD());
+		modules.add(new NewChunks());
+		modules.add(new ChestSteal());
+		modules.add(new PacketFly());
+		modules.add(new CartAura());
 		
 		Config.load();
 		

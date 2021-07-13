@@ -8,6 +8,7 @@ import java.io.IOException;
 
 import MEDMEX.Client;
 import MEDMEX.modules.Module;
+import MEDMEX.modules.Player.SpeedMine;
 import noom.utils.ModuleUtils;
 
 public class Config {
@@ -26,6 +27,12 @@ public class Config {
 				String name = module.split(":")[0];
 				String keyCode = module.split(":")[1];
 				String state = module.split(":")[2].toLowerCase();
+				if(name.equals("SpeedMine")) {
+					String mode = module.split(":")[3];
+					SpeedMine.mode = mode;
+				}
+				
+				
 				ModuleUtils.getModuleByName(name).keyCode.code = Integer.parseInt(keyCode);
 				if(Boolean.parseBoolean(state)){
 					if(!ModuleUtils.getModuleByName(name).isEnabled()){
@@ -50,7 +57,15 @@ public class Config {
 		try(FileWriter writer = new FileWriter(new File(configfiledir), false))
         {
 			for(Module m : Client.modules){
-				writer.write(m.name + ":" + m.keyCode.code + ":" + m.isEnabled() + "\n");
+				switch(m.name) {
+				case "SpeedMine":
+					writer.write(m.name + ":" + m.keyCode.code + ":" + m.isEnabled() + ":" + SpeedMine.mode +"\n");
+					break;
+				default:
+					writer.write(m.name + ":" + m.keyCode.code + ":" + m.isEnabled() + "\n");
+					break;
+					
+				}
 			}
 			
             writer.flush();

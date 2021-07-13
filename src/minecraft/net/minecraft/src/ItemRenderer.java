@@ -5,6 +5,7 @@ import org.lwjgl.opengl.GL12;
 
 public class ItemRenderer
 {
+	public static boolean retardfov = false;
 	float var11, var12;
 	public static float fov1 = 0.0f;
 	public static float fov2 = 0.3f;
@@ -45,6 +46,16 @@ public class ItemRenderer
 
         if (par2ItemStack.getItemSpriteNumber() == 0 && par2ItemStack.itemID < Block.blocksList.length && Block.blocksList[par2ItemStack.itemID] != null && RenderBlocks.renderItemIn3d(Block.blocksList[par2ItemStack.itemID].getRenderType()))
         {
+        	if(par1EntityLivingBase.getEntityName().equals(Session.username) && mc.gameSettings.thirdPersonView == 0) {
+            	var11 = fov1;
+                var12 = fov2;
+            }else {
+            	var11 = 0.0f;
+            	var12 = 0.3f;
+            }
+        	if(retardfov) {
+        	 GL11.glTranslatef(-var11, -var12, 0.0F);
+        	}
             var4.bindTexture(var4.getResourceLocation(0));
             this.renderBlocksInstance.renderBlockAsItem(Block.blocksList[par2ItemStack.itemID], par2ItemStack.getItemDamage(), 1.0F);
         }
@@ -63,7 +74,7 @@ public class ItemRenderer
             float var8 = var5.getMaxU();
             float var9 = var5.getMinV();
             float var10 = var5.getMaxV();
-            if(par1EntityLivingBase.getEntityName().equals(Session.username)) {
+            if(par1EntityLivingBase.getEntityName().equals(Session.username) && mc.gameSettings.thirdPersonView == 0) {
             	var11 = fov1;
                 var12 = fov2;
             }else {

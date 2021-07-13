@@ -22,6 +22,7 @@ public class BiomeCache
 
     public BiomeCache(WorldChunkManager par1WorldChunkManager)
     {
+    	
         this.chunkManager = par1WorldChunkManager;
     }
 
@@ -30,6 +31,7 @@ public class BiomeCache
      */
     public BiomeCacheBlock getBiomeCacheBlock(int par1, int par2)
     {
+    	
         par1 >>= 4;
         par2 >>= 4;
         long var3 = (long)par1 & 4294967295L | ((long)par2 & 4294967295L) << 32;
@@ -86,6 +88,7 @@ public class BiomeCache
      */
     public BiomeGenBase[] getCachedBiomes(int par1, int par2)
     {
+    	
         return this.getBiomeCacheBlock(par1, par2).biomes;
     }
 

@@ -24,6 +24,7 @@ public class Strafe extends Module {
 	public void onEvent(Event e) {
 		if(e instanceof EventUpdate) {
 			if(e.isPre()) {
+				mc.thePlayer.setSprinting(true);
 				 boolean moving = Math.abs(mc.thePlayer.movementInput.moveForward) > 0.1 || Math.abs(mc.thePlayer.movementInput.moveStrafe) > 0.1;
 	                if (moving) {
 	                	if(mc.thePlayer.onGround) {

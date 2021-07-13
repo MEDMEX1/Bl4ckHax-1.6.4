@@ -99,7 +99,7 @@ public class Scaffold extends Module {
 				if(decX < 0.3 || decX > 0.7 || decX < -0.7 || decX > -0.3){
 					//+X
 					if(mc.thePlayer.motionX > 0.02) {
-						if(mc.theWorld.isAirBlock(X+offsetX+1, Y-2, Z+offsetZ)) {
+						if(mc.theWorld.isAirBlock(X+offsetX+1, Y-2, Z+offsetZ) || !mc.theWorld.doesBlockHaveSolidTopSurface(X+offsetX+1, Y-2, Z+offsetZ)) {
 							RenderGlobal.scaffold = true;
 							RenderGlobal.scaffoldx = X+offsetX+2;
 							RenderGlobal.scaffoldy = Y-2;
@@ -112,7 +112,7 @@ public class Scaffold extends Module {
 					}
 					//-X
 					if(mc.thePlayer.motionX < -0.02) {
-						if(mc.theWorld.isAirBlock(X+offsetX-1, Y-2, Z+offsetZ)) {
+						if(mc.theWorld.isAirBlock(X+offsetX-1, Y-2, Z+offsetZ) || !mc.theWorld.doesBlockHaveSolidTopSurface(X+offsetX-1, Y-2, Z+offsetZ)) {
 							RenderGlobal.scaffold = true;
 							RenderGlobal.scaffoldx = X+offsetX-2;
 							RenderGlobal.scaffoldy = Y-2;
@@ -127,7 +127,7 @@ public class Scaffold extends Module {
 				if(decZ < 0.3 || decZ > 0.7 || decZ < -0.7 || decZ > -0.3) {
 					//+Z
 					if(mc.thePlayer.motionZ > 0.02) {
-						if(mc.theWorld.isAirBlock(X+offsetX, Y-2, Z+offsetZ+1)) {
+						if(mc.theWorld.isAirBlock(X+offsetX, Y-2, Z+offsetZ+1) || !mc.theWorld.doesBlockHaveSolidTopSurface(X+offsetX, Y-2, Z+offsetZ+1)) {
 							RenderGlobal.scaffold = true;
 							RenderGlobal.scaffoldx = X+offsetX;
 							RenderGlobal.scaffoldy = Y-2;
@@ -140,7 +140,7 @@ public class Scaffold extends Module {
 					}
 					//-Z
 					if(mc.thePlayer.motionZ < -0.02) {
-						if(mc.theWorld.isAirBlock(X+offsetX, Y-2, Z+offsetZ-1)) {
+						if(mc.theWorld.isAirBlock(X+offsetX, Y-2, Z+offsetZ-1) || !mc.theWorld.doesBlockHaveSolidTopSurface(X+offsetX, Y-2, Z+offsetZ-1)) {
 							mc.thePlayer.swingItem();
 							RenderGlobal.scaffold = true;
 							RenderGlobal.scaffoldx = X+offsetX;
@@ -152,7 +152,7 @@ public class Scaffold extends Module {
 						}
 					}
 					//jump
-					if(mc.theWorld.isAirBlock(X+offsetX, Y-2, Z+offsetZ)) {
+					if(mc.theWorld.isAirBlock(X+offsetX, Y-2, Z+offsetZ) || !mc.theWorld.doesBlockHaveSolidTopSurface(X+offsetX, Y-2, Z+offsetZ)) {
 						EntityClientPlayerMP.customyaw = mc.thePlayer.rotationYaw;
 						EntityClientPlayerMP.custompitch = 90f;
 						RenderGlobal.scaffold = true;
